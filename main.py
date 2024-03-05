@@ -1,6 +1,6 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
-from mainwindow import *
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from ui.mainwindow import *
 
 
 class MyWindow(QMainWindow, Ui_MainWindow):
