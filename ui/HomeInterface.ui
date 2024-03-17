@@ -87,7 +87,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="TransparentPushButton" name="TransparentPushButton_2">
+      <widget class="TransparentPushButton" name="voiceAnalysisButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -100,7 +100,7 @@
       </widget>
      </item>
      <item>
-      <widget class="TransparentPushButton" name="TransparentPushButton">
+      <widget class="TransparentPushButton" name="filterDesignerButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
