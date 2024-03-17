@@ -14,9 +14,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_HomeInterface(object):
     def setupUi(self, HomeInterface):
         HomeInterface.setObjectName("HomeInterface")
-        HomeInterface.resize(568, 479)
+        HomeInterface.resize(800, 600)
         HomeInterface.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.verticalLayout = QtWidgets.QVBoxLayout(HomeInterface)
+        self.verticalLayout.setContentsMargins(20, 40, 20, 20)
         self.verticalLayout.setObjectName("verticalLayout")
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)

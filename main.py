@@ -33,6 +33,8 @@ class Window(SplitFluentWindow):
             position=NavigationItemPosition.BOTTOM
         )
 
+        self.navigationInterface.setExpandWidth(280)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
