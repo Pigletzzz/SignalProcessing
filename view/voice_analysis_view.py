@@ -1,6 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QTableWidget, QTableView, QTableWidgetItem, QAbstractItemView, QFileDialog
-from pydub import AudioSegment
-from qfluentwidgets import FluentIcon, TableWidget, TableItemDelegate
+from PyQt5.QtWidgets import QWidget, QTableWidgetItem, QFileDialog, QAbstractItemView
+from qfluentwidgets import FluentIcon
 
 from controller.voice_file_controller import VoiceFileController
 from tool.time_tool import ms_to_min_sec
@@ -25,6 +24,8 @@ class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface):
         self.TableWidget.setHorizontalHeaderLabels(['Title', 'Duration'])
         self.TableWidget.setBorderVisible(True)
         self.TableWidget.verticalHeader().hide()
+        # 关闭双击编辑功能
+        self.TableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
     # 初始化事件
     def initEvent(self):
