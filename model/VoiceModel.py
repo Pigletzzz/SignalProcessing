@@ -1,4 +1,4 @@
-from voice import Voice
+from entity.voice import Voice
 
 
 class VoiceModel:

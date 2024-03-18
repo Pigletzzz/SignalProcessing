@@ -1,7 +1,7 @@
 from pydub import AudioSegment
 
 from model.VoiceModel import VoiceModel
-from voice import Voice
+from entity.voice import Voice
 
 
 class VoiceFileController:

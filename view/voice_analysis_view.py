@@ -4,7 +4,7 @@ from qfluentwidgets import FluentIcon
 from controller.voice_file_controller import VoiceFileController
 from tool.time_tool import ms_to_min_sec
 from ui.Ui_VoiceAnalysisInterface import Ui_VoiceAnalysisInterface
-from voice import Voice
+from entity.voice import Voice
 
 
 class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface):
