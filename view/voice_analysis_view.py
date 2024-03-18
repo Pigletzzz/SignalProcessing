@@ -1,8 +1,9 @@
+from PyQt5 import QtCore
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem, QFileDialog, QAbstractItemView
 from qfluentwidgets import FluentIcon
 
 from controller.voice_file_controller import VoiceFileController
-from tool.time_tool import ms_to_min_sec
+from tool.UnitTool import ms_to_min_sec, byteToMB
 from ui.Ui_VoiceAnalysisInterface import Ui_VoiceAnalysisInterface
 from entity.voice import Voice
 
@@ -19,17 +20,17 @@ class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface):
 
     # 初始化界面
     def initView(self):
-        self.TransparentToolButton.setIcon(FluentIcon.FOLDER)
-        self.TableWidget.setColumnCount(2)
-        self.TableWidget.setHorizontalHeaderLabels(['Title', 'Duration'])
-        self.TableWidget.setBorderVisible(True)
-        self.TableWidget.verticalHeader().hide()
+        self.fileButton.setIcon(FluentIcon.FOLDER)
+        self.filesTable.setColumnCount(2)
+        self.filesTable.setHorizontalHeaderLabels(['Title', 'Duration'])
+        # self.TableWidget.setBorderVisible(True)
+        self.filesTable.verticalHeader().hide()
         # 关闭双击编辑功能
-        self.TableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.filesTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
     # 初始化事件
     def initEvent(self):
-        self.TransparentToolButton.clicked.connect(self.onFileButtonClicked)
+        self.fileButton.clicked.connect(self.onFileButtonClicked)
 
     # 文件选择按下事件
     def onFileButtonClicked(self):
@@ -45,8 +46,18 @@ class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface):
     # 为table添加一项
     def addTabItem(self, voice: Voice):
         # 新加一行
-        row_count = self.TableWidget.rowCount()
-        self.TableWidget.insertRow(row_count)
+        row_count = self.filesTable.rowCount()
+        self.filesTable.insertRow(row_count)
         # 设置行的参数
-        self.TableWidget.setItem(row_count, 0, QTableWidgetItem(voice.title))
-        self.TableWidget.setItem(row_count, 1, QTableWidgetItem(ms_to_min_sec(voice.duration)))
+        self.filesTable.setItem(row_count, 0, QTableWidgetItem(voice.title))
+        self.filesTable.setItem(row_count, 1, QTableWidgetItem(ms_to_min_sec(voice.duration)))
+
+        self.onItemChose(voice)
+
+    def onItemChose(self, voice: Voice):
+        _translate = QtCore.QCoreApplication.translate
+        self.fileNameLabel.setText(_translate("VoiceAnalysisInterface", voice.title))
+        self.fileDirLabel.setText(_translate("VoiceAnalysisInterface", voice.path))
+        self.fileSizeLabel.setText(_translate("VoiceAnalysisInterface", byteToMB(voice.size)))
+        self.sampleRateLabel.setText(_translate("VoiceAnalysisInterface", str(voice.bitRate) + " bps"))
+        self.durationLabel.setText(_translate("VoiceAnalysisInterface", str(ms_to_min_sec(voice.duration))))

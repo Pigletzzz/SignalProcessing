@@ -73,12 +73,12 @@
            </spacer>
           </item>
           <item>
-           <widget class="TransparentToolButton" name="TransparentToolButton"/>
+           <widget class="TransparentToolButton" name="fileButton"/>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="TableWidget" name="TableWidget"/>
+         <widget class="TableWidget" name="filesTable"/>
         </item>
        </layout>
       </widget>
@@ -93,7 +93,7 @@
        </property>
        <layout class="QFormLayout" name="formLayout">
         <item row="1" column="1">
-         <widget class="BodyLabel" name="BodyLabel">
+         <widget class="BodyLabel" name="fileNameLabel">
           <property name="layoutDirection">
            <enum>Qt::LeftToRight</enum>
           </property>
@@ -106,7 +106,7 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="BodyLabel" name="BodyLabel_2">
+         <widget class="BodyLabel" name="fileDirLabel">
           <property name="text">
            <string>Body label</string>
           </property>
@@ -116,7 +116,7 @@
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="BodyLabel" name="BodyLabel_3">
+         <widget class="BodyLabel" name="durationLabel">
           <property name="text">
            <string>Body label</string>
           </property>
@@ -126,7 +126,7 @@
          </widget>
         </item>
         <item row="4" column="1">
-         <widget class="BodyLabel" name="BodyLabel_4">
+         <widget class="BodyLabel" name="sampleRateLabel">
           <property name="text">
            <string>Body label</string>
           </property>
@@ -136,7 +136,7 @@
          </widget>
         </item>
         <item row="5" column="1">
-         <widget class="BodyLabel" name="BodyLabel_5">
+         <widget class="BodyLabel" name="fileSizeLabel">
           <property name="text">
            <string>Body label</string>
           </property>
@@ -176,7 +176,7 @@
         <item row="4" column="0">
          <widget class="BodyLabel" name="BodyLabel_9">
           <property name="text">
-           <string>比特率</string>
+           <string>采样率</string>
           </property>
          </widget>
         </item>
@@ -200,6 +200,63 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QGraphicsView" name="graphicsView"/>
+      </item>
+      <item>
+       <widget class="QGraphicsView" name="graphicsView_2"/>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="CaptionLabel" name="currentTimeLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>):00</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="ProgressBar" name="audioProcessBar"/>
+        </item>
+        <item>
+         <widget class="CaptionLabel" name="totalTimeLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>3:34</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+       <widget class="ToolButton" name="playButton"/>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>
@@ -228,6 +285,11 @@
    <container>1</container>
   </customwidget>
   <customwidget>
+   <class>CaptionLabel</class>
+   <extends>QLabel</extends>
+   <header>qfluentwidgets</header>
+  </customwidget>
+  <customwidget>
    <class>BodyLabel</class>
    <extends>QLabel</extends>
    <header>qfluentwidgets</header>
@@ -240,6 +302,11 @@
   <customwidget>
    <class>TitleLabel</class>
    <extends>QLabel</extends>
+   <header>qfluentwidgets</header>
+  </customwidget>
+  <customwidget>
+   <class>ProgressBar</class>
+   <extends>QProgressBar</extends>
    <header>qfluentwidgets</header>
   </customwidget>
   <customwidget>
