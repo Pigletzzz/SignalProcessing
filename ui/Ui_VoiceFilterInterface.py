@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_VoiceFilterInterface(object):
     def setupUi(self, VoiceFilterInterface):
         VoiceFilterInterface.setObjectName("VoiceFilterInterface")
-        VoiceFilterInterface.resize(400, 300)
+        VoiceFilterInterface.resize(492, 353)
         self.TitleLabel = TitleLabel(VoiceFilterInterface)
         self.TitleLabel.setGeometry(QtCore.QRect(110, 90, 191, 91))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
