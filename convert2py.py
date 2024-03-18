@@ -2,7 +2,7 @@ import os
 import os.path
 
 # UI文件所在路径
-dir = './ui/'
+dir = 'ui/'
 
 
 # 列出目录下的所有UI文件
@@ -25,7 +25,7 @@ def run_main():
     ui_files = list_ui_file()
     for ui_file in ui_files:
         py_file = trans_py_file(ui_file)
-        cmd = 'pyuic5 -o {py_file} {ui_file}'.format(py_file=py_file, ui_file=ui_file)
+        cmd = 'pyuic5 -o {py_file} {ui_file}'.format(py_file=dir + py_file, ui_file=dir + ui_file)
         # print(cmd)
         os.system(cmd)
 
