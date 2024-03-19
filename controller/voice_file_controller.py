@@ -27,4 +27,4 @@ class VoiceFileController:
         self.voiceAnalysisView.addTabItem(voice)
 
     def selectFile(self, index: int):
-        self.voiceAnalysisView.showVoice(self.voiceModel.getVoice(index))
+        self.voiceAnalysisView.setupVoice(self.voiceModel.getVoice(index))

@@ -1,7 +1,8 @@
 from PyQt5 import QtCore
-from PyQt5.QtCore import QModelIndex
+from PyQt5.QtCore import QModelIndex, QUrl
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem, QFileDialog, QAbstractItemView
 from qfluentwidgets import FluentIcon
+from qfluentwidgets.multimedia import SimpleMediaPlayBar
 
 from controller.voice_file_controller import VoiceFileController
 from tool.UnitTool import ms_to_min_sec, byteToMB
@@ -22,7 +23,6 @@ class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface, ):
     # 初始化界面
     def initView(self):
         self.fileButton.setIcon(FluentIcon.FOLDER)
-        self.playButton.setIcon(FluentIcon.PLAY)
 
         self.filesTable.setColumnCount(2)
         self.filesTable.setHorizontalHeaderLabels(['Title', 'Duration'])
@@ -30,6 +30,9 @@ class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface, ):
         self.filesTable.verticalHeader().hide()
         # 关闭双击编辑功能
         self.filesTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        # 初始化音频bar
+        self.simplePlayerBar = SimpleMediaPlayBar(self)
+        self.verticalLayout_4.addWidget(self.simplePlayerBar)
 
     # 初始化事件
     def initEvent(self):
@@ -62,7 +65,7 @@ class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface, ):
     def onItemChose(self):
         self.voiceFileController.selectFile(self.filesTable.selectedIndexes()[0].row())
 
-    def showVoice(self, voice: Voice):
+    def setupVoice(self, voice: Voice):
         # 进行详细信息的显示
         _translate = QtCore.QCoreApplication.translate
         self.fileNameLabel.setText(_translate("VoiceAnalysisInterface", voice.title))
@@ -70,5 +73,6 @@ class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface, ):
         self.fileSizeLabel.setText(_translate("VoiceAnalysisInterface", byteToMB(voice.size)))
         self.sampleRateLabel.setText(_translate("VoiceAnalysisInterface", str(voice.bitRate / 1000) + " Kbps"))
         self.durationLabel.setText(_translate("VoiceAnalysisInterface", str(ms_to_min_sec(voice.duration))))
-        # 播放栏更新
-        self.totalTimeLabel.setText(_translate("VoiceAnalysisInterface", str(ms_to_min_sec(voice.duration))))
+
+        # 设置播放器器资源
+        self.simplePlayerBar.player.setSource(QUrl.fromLocalFile(voice.path + '/' + voice.title))
