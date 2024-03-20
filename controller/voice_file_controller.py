@@ -14,7 +14,7 @@ class VoiceFileController:
     # 读取音频文件
     def readFile(self, fileName):
         # 使用pydub读取音频文件
-        y, sr = librosa.load(fileName)
+        y, sr = librosa.load(fileName, sr=None)
         # 这里可以添加更多的音频处理逻辑
         voice = Voice(y, os.path.basename(fileName), int(len(y) / sr), os.path.dirname(fileName), int(sr),
                       os.path.getsize(fileName))

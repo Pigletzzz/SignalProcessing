@@ -71,7 +71,7 @@ class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface, ):
         self.fileNameLabel.setText(_translate("VoiceAnalysisInterface", voice.title))
         self.fileDirLabel.setText(_translate("VoiceAnalysisInterface", voice.path))
         self.fileSizeLabel.setText(_translate("VoiceAnalysisInterface", byteToMB(voice.size)))
-        self.sampleRateLabel.setText(_translate("VoiceAnalysisInterface", str(voice.sampleRate / 1000) + " Kbps"))
+        self.sampleRateLabel.setText(_translate("VoiceAnalysisInterface", str(voice.sampleRate / 1000) + " KHz"))
         self.durationLabel.setText(_translate("VoiceAnalysisInterface", str(secToMMSS(voice.duration))))
 
         # 设置播放器器资源
