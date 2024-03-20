@@ -1,6 +1,6 @@
 import os.path
 
-from pydub import AudioSegment
+import librosa
 
 from model.VoiceModel import VoiceModel
 from entity.voice import Voice
@@ -14,9 +14,9 @@ class VoiceFileController:
     # 读取音频文件
     def readFile(self, fileName):
         # 使用pydub读取音频文件
-        audio = AudioSegment.from_file(fileName, format=fileName.split('.')[-1])
+        y, sr = librosa.load(fileName)
         # 这里可以添加更多的音频处理逻辑
-        voice = Voice(audio, os.path.basename(fileName), len(audio), os.path.dirname(fileName), audio.frame_rate,
+        voice = Voice(y, os.path.basename(fileName), int(len(y) / sr), os.path.dirname(fileName), int(sr),
                       os.path.getsize(fileName))
         self.addFile(voice)
 

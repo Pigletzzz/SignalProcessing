@@ -5,6 +5,11 @@ def ms_to_min_sec(milliseconds):
     remaining_seconds = seconds % 60  # 求余得到剩余的秒数
     return f"{int(minutes)}:{remaining_seconds:02d}"
 
+def secToMMSS(duration):
+    minutes = duration // 60
+    seconds = duration % 60
+    return f"{int(minutes)}:{seconds:02d}"
+
 
 # 将byte转换为MB
 def byteToMB(byte: int):

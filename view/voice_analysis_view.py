@@ -5,7 +5,7 @@ from qfluentwidgets import FluentIcon
 from qfluentwidgets.multimedia import SimpleMediaPlayBar
 
 from controller.voice_file_controller import VoiceFileController
-from tool.UnitTool import ms_to_min_sec, byteToMB
+from tool.UnitTool import ms_to_min_sec, byteToMB, secToMMSS
 from ui.Ui_VoiceAnalysisInterface import Ui_VoiceAnalysisInterface
 from entity.voice import Voice
 
@@ -71,8 +71,8 @@ class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface, ):
         self.fileNameLabel.setText(_translate("VoiceAnalysisInterface", voice.title))
         self.fileDirLabel.setText(_translate("VoiceAnalysisInterface", voice.path))
         self.fileSizeLabel.setText(_translate("VoiceAnalysisInterface", byteToMB(voice.size)))
-        self.sampleRateLabel.setText(_translate("VoiceAnalysisInterface", str(voice.bitRate / 1000) + " Kbps"))
-        self.durationLabel.setText(_translate("VoiceAnalysisInterface", str(ms_to_min_sec(voice.duration))))
+        self.sampleRateLabel.setText(_translate("VoiceAnalysisInterface", str(voice.sampleRate / 1000) + " Kbps"))
+        self.durationLabel.setText(_translate("VoiceAnalysisInterface", str(secToMMSS(voice.duration))))
 
         # 设置播放器器资源
         self.simplePlayerBar.player.setSource(QUrl.fromLocalFile(voice.path + '/' + voice.title))
