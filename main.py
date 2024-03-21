@@ -8,16 +8,19 @@ from model.VoiceModel import VoiceModel
 from view.main_window_view import MainWindow
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    myWin = MainWindow()
+    try:
+        app = QApplication(sys.argv)
+        myWin = MainWindow()
 
-    voiceModel = VoiceModel()
+        voiceModel = VoiceModel()
 
-    routeController = RouteController(myWin)
-    voiceFileController = VoiceFileController(myWin.voiceAnalysisView, voiceModel)
+        routeController = RouteController(myWin)
+        voiceFileController = VoiceFileController(myWin.voiceAnalysisView, voiceModel)
 
-    myWin.homeView.routeController = routeController
-    myWin.voiceAnalysisView.voiceFileController = voiceFileController
+        myWin.homeView.routeController = routeController
+        myWin.voiceAnalysisView.voiceFileController = voiceFileController
 
-    myWin.show()
-    sys.exit(app.exec_())
+        myWin.show()
+        sys.exit(app.exec_())
+    except Exception as e:
+        print(f"发生了未知异常: {e}")

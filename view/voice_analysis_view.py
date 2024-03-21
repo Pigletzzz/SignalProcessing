@@ -1,11 +1,11 @@
 from PyQt5 import QtCore
-from PyQt5.QtCore import QModelIndex, QUrl
+from PyQt5.QtCore import QUrl
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem, QFileDialog, QAbstractItemView
 from qfluentwidgets import FluentIcon
 from qfluentwidgets.multimedia import SimpleMediaPlayBar
 
 from controller.voice_file_controller import VoiceFileController
-from tool.UnitTool import ms_to_min_sec, byteToMB, secToMMSS
+from tool.UnitTool import byteToMB, secToMMSS
 from ui.Ui_VoiceAnalysisInterface import Ui_VoiceAnalysisInterface
 from entity.voice import Voice
 
@@ -57,7 +57,7 @@ class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface, ):
         self.filesTable.insertRow(row_count)
         # 设置行的参数
         self.filesTable.setItem(row_count, 0, QTableWidgetItem(voice.title))
-        self.filesTable.setItem(row_count, 1, QTableWidgetItem(ms_to_min_sec(voice.duration)))
+        self.filesTable.setItem(row_count, 1, QTableWidgetItem(secToMMSS(voice.duration)))
         self.filesTable.selectRow(row_count)
 
         # self.showVoice(voice)
