@@ -1,5 +1,6 @@
 from PyQt5 import QtCore
 from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QResizeEvent
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem, QFileDialog, QAbstractItemView
 from qfluentwidgets import FluentIcon
 from qfluentwidgets.multimedia import SimpleMediaPlayBar
@@ -76,3 +77,13 @@ class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface, ):
 
         # 设置播放器器资源
         self.simplePlayerBar.player.setSource(QUrl.fromLocalFile(voice.path + '/' + voice.title))
+
+    def resizeEvent(self, event: QResizeEvent):
+        super().resizeEvent(event)
+        self.setLabelMaxSize()
+
+    def setLabelMaxSize(self):
+        # TODO 根据GraphicsView的宽度设置这个宽度
+        maxWidth = self.SimpleCardWidget.width() - self.StrongBodyLabel_6.width() - 24
+        self.fileNameLabel.setMaximumWidth(maxWidth if maxWidth > 100 else 100)
+        self.fileDirLabel.setMaximumWidth(maxWidth if maxWidth > 100 else 100)

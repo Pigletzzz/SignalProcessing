@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget,QDesktopWidget
 from qfluentwidgets import SplitFluentWindow, FluentIcon, NavigationAvatarWidget, NavigationItemPosition
 
 from view.filter_designer_view import FilterDesignerView
@@ -14,8 +14,17 @@ class MainWindow(SplitFluentWindow):
         self.voiceAnalysisView = VoiceAnalysisView()
         self.filterDesignerView = FilterDesignerView()
         self.voiceFilterView = VoiceFilterView()
+
+        self.resize(800, 600)
         self.setWindowTitle('Signal Processing')
         # self.setWindowIcon(QIcon(''))
+        # 获取屏幕坐标系
+        screen = QDesktopWidget().screenGeometry()
+        # 获取窗口坐标系
+        size = self.geometry()
+        newLeft = (screen.width() - size.width()) / 2
+        newTop = (screen.height() - size.height()) / 2
+        self.move(int(newLeft), int(newTop))
 
         self.initNavigation()
 
@@ -30,7 +39,7 @@ class MainWindow(SplitFluentWindow):
 
         self.navigationInterface.addWidget(
             routeKey='avatar',
-            widget=NavigationAvatarWidget('Pun-zeoncoeng', './resource/my_icon.png'),
+            widget=NavigationAvatarWidget('Pun-zeoncoeng', './resources/my_icon.png'),
             position=NavigationItemPosition.BOTTOM
         )
 

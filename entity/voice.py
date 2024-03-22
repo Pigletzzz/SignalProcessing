@@ -1,5 +1,4 @@
 import numpy
-from pydub import AudioSegment
 
 
 class Voice(object):
