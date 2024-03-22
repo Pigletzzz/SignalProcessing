@@ -2,23 +2,23 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 
+from controller.AudioFileController import AudioFileController
 from controller.route_controller import RouteController
-from controller.voice_file_controller import VoiceFileController
-from model.VoiceModel import VoiceModel
-from view.main_window_view import MainWindow
+from model.AudioModel import AudioModel
+from view.MainWindowView import MainWindow
 
 if __name__ == '__main__':
     try:
         app = QApplication(sys.argv)
         myWin = MainWindow()
 
-        voiceModel = VoiceModel()
+        AudioModel = AudioModel()
 
         routeController = RouteController(myWin)
-        voiceFileController = VoiceFileController(myWin.voiceAnalysisView, voiceModel)
+        audioFileController = AudioFileController(myWin.audioAnalysisView, AudioModel)
 
         myWin.homeView.routeController = routeController
-        myWin.voiceAnalysisView.voiceFileController = voiceFileController
+        myWin.audioAnalysisView.audioFileController = audioFileController
 
         myWin.show()
         sys.exit(app.exec_())

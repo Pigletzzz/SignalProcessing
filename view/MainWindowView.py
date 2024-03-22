@@ -1,19 +1,19 @@
-from PyQt5.QtWidgets import QWidget,QDesktopWidget
+from PyQt5.QtWidgets import QWidget, QDesktopWidget
 from qfluentwidgets import SplitFluentWindow, FluentIcon, NavigationAvatarWidget, NavigationItemPosition
 
-from view.filter_designer_view import FilterDesignerView
-from view.home_view import HomeView
-from view.voice_analysis_view import VoiceAnalysisView
-from view.voice_filter_view import VoiceFilterView
+from view.AudioAnalysisView import AudioAnalysisView
+from view.AudioFilterView import AudioFilterView
+from view.FilterDesignerView import FilterDesignerView
+from view.HomeView import HomeView
 
 
 class MainWindow(SplitFluentWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.homeView = HomeView()
-        self.voiceAnalysisView = VoiceAnalysisView()
+        self.audioAnalysisView = AudioAnalysisView()
         self.filterDesignerView = FilterDesignerView()
-        self.voiceFilterView = VoiceFilterView()
+        self.audioFilterView = AudioFilterView()
 
         self.resize(800, 600)
         self.setWindowTitle('Signal Processing')
@@ -28,14 +28,14 @@ class MainWindow(SplitFluentWindow):
 
         self.initNavigation()
 
-        self.widgets = [self.homeView, self.voiceAnalysisView,
-                        self.filterDesignerView, self.voiceFilterView]
+        self.widgets = [self.homeView, self.audioAnalysisView,
+                        self.filterDesignerView, self.audioFilterView]
 
     def initNavigation(self):
         self.addSubInterface(self.homeView, FluentIcon.HOME, '首页')
-        self.addSubInterface(self.voiceAnalysisView, FluentIcon.MICROPHONE, '语音分析')
+        self.addSubInterface(self.audioAnalysisView, FluentIcon.MICROPHONE, '语音分析')
         self.addSubInterface(self.filterDesignerView, FluentIcon.VIDEO, '滤波器设计')
-        self.addSubInterface(self.voiceFilterView, FluentIcon.MEDIA, '语音滤波')
+        self.addSubInterface(self.audioFilterView, FluentIcon.MEDIA, '语音滤波')
 
         self.navigationInterface.addWidget(
             routeKey='avatar',

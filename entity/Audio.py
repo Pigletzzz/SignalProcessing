@@ -1,7 +1,7 @@
 import numpy
 
 
-class Voice(object):
+class Audio(object):
     def __init__(self, voiceNum: numpy.ndarray, title: str, duration: int, path: str, sampleRate: int, size: int):
         # AudioSegment实例对象
         self.voiceNum: numpy.ndarray = voiceNum

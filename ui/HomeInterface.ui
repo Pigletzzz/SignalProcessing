@@ -87,7 +87,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="TransparentPushButton" name="voiceAnalysisButton">
+      <widget class="TransparentPushButton" name="audioAnalysisButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>

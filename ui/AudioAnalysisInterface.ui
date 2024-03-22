@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>VoiceAnalysisInterface</class>
- <widget class="QWidget" name="VoiceAnalysisInterface">
+    <class>AudioAnalysisInterface</class>
+    <widget class="QWidget" name="AudioAnalysisInterface">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -37,7 +37,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Voice Analysis</string>
+           <string>Audio Analysis</string>
        </property>
       </widget>
      </item>

@@ -13,10 +13,10 @@ class HomeView(QWidget, Ui_HomeInterface):
         self.initSignal()
 
     def initSignal(self):
-        self.voiceAnalysisButton.clicked.connect(self.onVoiceAnalysisButtonClicked)
+        self.audioAnalysisButton.clicked.connect(self.onAudioAnalysisButtonClicked)
         self.filterDesignerButton.clicked.connect(self.onFilterDesignerButtonClicked)
 
-    def onVoiceAnalysisButtonClicked(self):
+    def onAudioAnalysisButtonClicked(self):
         self.routeController.routeToView(1)
 
     def onFilterDesignerButtonClicked(self):

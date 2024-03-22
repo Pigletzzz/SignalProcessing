@@ -5,18 +5,18 @@ from PyQt5.QtWidgets import QWidget, QTableWidgetItem, QFileDialog, QAbstractIte
 from qfluentwidgets import FluentIcon
 from qfluentwidgets.multimedia import SimpleMediaPlayBar
 
-from controller.voice_file_controller import VoiceFileController
-from entity.voice import Voice
+from controller.AudioFileController import AudioFileController
+from entity.Audio import Audio
 from tool.UnitTool import byteToMB, secToMMSS
-from ui.Ui_VoiceAnalysisInterface import Ui_VoiceAnalysisInterface
+from ui.Ui_AudioAnalysisInterface import Ui_AudioAnalysisInterface
 
 
-class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface):
+class AudioAnalysisView(QWidget, Ui_AudioAnalysisInterface):
     def __init__(self, parent=None):
         super().__init__(parent=parent)
         self.setupUi(self)
 
-        self.voiceFileController: VoiceFileController = None
+        self.audioFileController: AudioFileController = None
 
         self.initView()
         self.initEvent()
@@ -49,34 +49,34 @@ class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface):
                                                   options=options)
 
         if fileName:
-            self.voiceFileController.readFile(fileName)
+            self.audioFileController.readFile(fileName)
 
     # 为table添加一项
-    def addTabItem(self, voice: Voice):
+    def addTabItem(self, audio: Audio):
         # 新加一行
         row_count = self.filesTable.rowCount()
         self.filesTable.insertRow(row_count)
         # 设置行的参数
-        self.filesTable.setItem(row_count, 0, QTableWidgetItem(voice.title))
-        self.filesTable.setItem(row_count, 1, QTableWidgetItem(secToMMSS(voice.duration)))
+        self.filesTable.setItem(row_count, 0, QTableWidgetItem(audio.title))
+        self.filesTable.setItem(row_count, 1, QTableWidgetItem(secToMMSS(audio.duration)))
         self.filesTable.selectRow(row_count)
 
-        # self.showVoice(voice)
+        # self.showAudio(audio)
 
     def onItemChose(self):
-        self.voiceFileController.selectFile(self.filesTable.selectedIndexes()[0].row())
+        self.audioFileController.selectFile(self.filesTable.selectedIndexes()[0].row())
 
-    def setupVoice(self, voice: Voice):
+    def setupAudio(self, audio: Audio):
         # 进行详细信息的显示
         _translate = QtCore.QCoreApplication.translate
-        self.fileNameLabel.setText(_translate("VoiceAnalysisInterface", voice.title))
-        self.fileDirLabel.setText(_translate("VoiceAnalysisInterface", voice.path))
-        self.fileSizeLabel.setText(_translate("VoiceAnalysisInterface", byteToMB(voice.size)))
-        self.sampleRateLabel.setText(_translate("VoiceAnalysisInterface", str(voice.sampleRate / 1000) + " KHz"))
-        self.durationLabel.setText(_translate("VoiceAnalysisInterface", str(secToMMSS(voice.duration))))
+        self.fileNameLabel.setText(_translate("AudioAnalysisInterface", audio.title))
+        self.fileDirLabel.setText(_translate("AudioAnalysisInterface", audio.path))
+        self.fileSizeLabel.setText(_translate("AudioAnalysisInterface", byteToMB(audio.size)))
+        self.sampleRateLabel.setText(_translate("AudioAnalysisInterface", str(audio.sampleRate / 1000) + " KHz"))
+        self.durationLabel.setText(_translate("AudioAnalysisInterface", str(secToMMSS(audio.duration))))
 
         # 设置播放器器资源
-        self.simplePlayerBar.player.setSource(QUrl.fromLocalFile(voice.path + '/' + voice.title))
+        self.simplePlayerBar.player.setSource(QUrl.fromLocalFile(audio.path + '/' + audio.title))
 
     def resizeEvent(self, event: QResizeEvent):
         super().resizeEvent(event)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui/VoiceFilterInterface.ui'
+# Form implementation generated from reading ui file 'ui/AudioFilterInterface.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -11,34 +11,34 @@
 from PyQt5 import QtCore, QtWidgets
 
 
-class Ui_VoiceFilterInterface(object):
-    def setupUi(self, VoiceFilterInterface):
-        VoiceFilterInterface.setObjectName("VoiceFilterInterface")
-        VoiceFilterInterface.resize(666, 475)
-        self.horizontalLayout = QtWidgets.QHBoxLayout(VoiceFilterInterface)
+class Ui_AudioFilterInterface(object):
+    def setupUi(self, AudioFilterInterface):
+        AudioFilterInterface.setObjectName("AudioFilterInterface")
+        AudioFilterInterface.resize(666, 475)
+        self.horizontalLayout = QtWidgets.QHBoxLayout(AudioFilterInterface)
         self.horizontalLayout.setContentsMargins(20, 40, 20, 20)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
-        self.SimpleCardWidget = SimpleCardWidget(VoiceFilterInterface)
+        self.SimpleCardWidget = SimpleCardWidget(AudioFilterInterface)
         self.SimpleCardWidget.setObjectName("SimpleCardWidget")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.SimpleCardWidget)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.StrongBodyLabel = StrongBodyLabel(self.SimpleCardWidget)
         self.StrongBodyLabel.setObjectName("StrongBodyLabel")
         self.verticalLayout_3.addWidget(self.StrongBodyLabel)
-        self.voiceTable = TableWidget(self.SimpleCardWidget)
+        self.audiosTable = TableWidget(self.SimpleCardWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.voiceTable.sizePolicy().hasHeightForWidth())
-        self.voiceTable.setSizePolicy(sizePolicy)
-        self.voiceTable.setObjectName("voiceTable")
-        self.voiceTable.setColumnCount(0)
-        self.voiceTable.setRowCount(0)
-        self.verticalLayout_3.addWidget(self.voiceTable)
+        sizePolicy.setHeightForWidth(self.audiosTable.sizePolicy().hasHeightForWidth())
+        self.audiosTable.setSizePolicy(sizePolicy)
+        self.audiosTable.setObjectName("voiceTable")
+        self.audiosTable.setColumnCount(0)
+        self.audiosTable.setRowCount(0)
+        self.verticalLayout_3.addWidget(self.audiosTable)
         self.verticalLayout.addWidget(self.SimpleCardWidget)
-        self.SimpleCardWidget_2 = SimpleCardWidget(VoiceFilterInterface)
+        self.SimpleCardWidget_2 = SimpleCardWidget(AudioFilterInterface)
         self.SimpleCardWidget_2.setObjectName("SimpleCardWidget_2")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.SimpleCardWidget_2)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
@@ -64,15 +64,13 @@ class Ui_VoiceFilterInterface(object):
         self.horizontalLayout.setStretch(0, 1)
         self.horizontalLayout.setStretch(1, 1)
 
-        self.retranslateUi(VoiceFilterInterface)
-        QtCore.QMetaObject.connectSlotsByName(VoiceFilterInterface)
+        self.retranslateUi(AudioFilterInterface)
+        QtCore.QMetaObject.connectSlotsByName(AudioFilterInterface)
 
-    def retranslateUi(self, VoiceFilterInterface):
+    def retranslateUi(self, AudioFilterInterface):
         _translate = QtCore.QCoreApplication.translate
-        VoiceFilterInterface.setWindowTitle(_translate("VoiceFilterInterface", "Form"))
-        self.StrongBodyLabel.setText(_translate("VoiceFilterInterface", "音频选择"))
-        self.StrongBodyLabel_2.setText(_translate("VoiceFilterInterface", "滤波器信息"))
-        self.PrimaryPushButton.setText(_translate("VoiceFilterInterface", "Primary push button"))
-
-
+        AudioFilterInterface.setWindowTitle(_translate("AudioFilterInterface", "Form"))
+        self.StrongBodyLabel.setText(_translate("AudioFilterInterface", "音频选择"))
+        self.StrongBodyLabel_2.setText(_translate("AudioFilterInterface", "滤波器信息"))
+        self.PrimaryPushButton.setText(_translate("AudioFilterInterface", "Primary push button"))
 from qfluentwidgets import PrimaryPushButton, SimpleCardWidget, StrongBodyLabel, TableWidget
