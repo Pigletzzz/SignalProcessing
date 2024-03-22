@@ -6,12 +6,12 @@ from qfluentwidgets import FluentIcon
 from qfluentwidgets.multimedia import SimpleMediaPlayBar
 
 from controller.voice_file_controller import VoiceFileController
+from entity.voice import Voice
 from tool.UnitTool import byteToMB, secToMMSS
 from ui.Ui_VoiceAnalysisInterface import Ui_VoiceAnalysisInterface
-from entity.voice import Voice
 
 
-class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface, ):
+class VoiceAnalysisView(QWidget, Ui_VoiceAnalysisInterface):
     def __init__(self, parent=None):
         super().__init__(parent=parent)
         self.setupUi(self)
