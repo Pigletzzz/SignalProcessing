@@ -15,7 +15,7 @@ if __name__ == '__main__':
         AudioModel = AudioModel()
 
         routeController = RouteController(myWin)
-        audioFileController = AudioFileController(myWin.audioAnalysisView, AudioModel)
+        audioFileController = AudioFileController(myWin.audioAnalysisView, myWin.audioFilterView, AudioModel)
 
         myWin.homeView.routeController = routeController
         myWin.audioAnalysisView.audioFileController = audioFileController

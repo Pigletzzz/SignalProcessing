@@ -15,6 +15,11 @@ class Ui_AudioFilterInterface(object):
     def setupUi(self, AudioFilterInterface):
         AudioFilterInterface.setObjectName("AudioFilterInterface")
         AudioFilterInterface.resize(666, 475)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(AudioFilterInterface.sizePolicy().hasHeightForWidth())
+        AudioFilterInterface.setSizePolicy(sizePolicy)
         self.horizontalLayout = QtWidgets.QHBoxLayout(AudioFilterInterface)
         self.horizontalLayout.setContentsMargins(20, 40, 20, 20)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -33,7 +38,7 @@ class Ui_AudioFilterInterface(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.audiosTable.sizePolicy().hasHeightForWidth())
         self.audiosTable.setSizePolicy(sizePolicy)
-        self.audiosTable.setObjectName("voiceTable")
+        self.audiosTable.setObjectName("audiosTable")
         self.audiosTable.setColumnCount(0)
         self.audiosTable.setRowCount(0)
         self.verticalLayout_3.addWidget(self.audiosTable)
@@ -72,5 +77,5 @@ class Ui_AudioFilterInterface(object):
         AudioFilterInterface.setWindowTitle(_translate("AudioFilterInterface", "Form"))
         self.StrongBodyLabel.setText(_translate("AudioFilterInterface", "音频选择"))
         self.StrongBodyLabel_2.setText(_translate("AudioFilterInterface", "滤波器信息"))
-        self.PrimaryPushButton.setText(_translate("AudioFilterInterface", "Primary push button"))
+        self.PrimaryPushButton.setText(_translate("AudioFilterInterface", "滤波"))
 from qfluentwidgets import PrimaryPushButton, SimpleCardWidget, StrongBodyLabel, TableWidget

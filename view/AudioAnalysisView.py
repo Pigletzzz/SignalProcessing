@@ -61,8 +61,6 @@ class AudioAnalysisView(QWidget, Ui_AudioAnalysisInterface):
         self.filesTable.setItem(row_count, 1, QTableWidgetItem(secToMMSS(audio.duration)))
         self.filesTable.selectRow(row_count)
 
-        # self.showAudio(audio)
-
     def onItemChose(self):
         self.audioFileController.selectFile(self.filesTable.selectedIndexes()[0].row())
 

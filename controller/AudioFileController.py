@@ -7,8 +7,9 @@ from model.AudioModel import AudioModel
 
 
 class AudioFileController:
-    def __init__(self, voiceAnalysisView, audioModel: AudioModel):
-        self.voiceAnalysisView = voiceAnalysisView
+    def __init__(self, audioAnalysisView, audioFilterView, audioModel: AudioModel):
+        self.audioAnalysisView = audioAnalysisView
+        self.audioFilterView = audioFilterView
         self.audioModel = audioModel
 
     # 读取音频文件
@@ -20,11 +21,12 @@ class AudioFileController:
                       os.path.getsize(fileName))
         self.addFile(voice)
 
-    def addFile(self, voice: Audio):
+    def addFile(self, audio: Audio):
         # 在model中添加项
-        self.audioModel.addAudio(voice)
+        self.audioModel.addAudio(audio)
         # 为view中的table添加一项
-        self.voiceAnalysisView.addTabItem(voice)
+        self.audioAnalysisView.addTabItem(audio)
+        self.audioFilterView.addTabItem(audio)
 
     def selectFile(self, index: int):
-        self.voiceAnalysisView.setupVoice(self.audioModel.getAudio(index))
+        self.audioAnalysisView.setupAudio(self.audioModel.getAudio(index))
