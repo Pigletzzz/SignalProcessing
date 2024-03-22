@@ -1,6 +1,5 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QStackedWidget, QLabel
-
 from qfluentwidgets import Pivot
 
 from ui.Ui_FilterDesignerInterface import Ui_FilterDesignerInterface
