@@ -9,10 +9,10 @@ from model.AudioModel import AudioModel
 from view.MainWindowView import MainWindow
 
 if __name__ == '__main__':
-    try:
-        # TEST 执行一次convert编译ui文件
-        convertUi2Py()
+    # TEST 执行一次convert编译ui文件
+    convertUi2Py()
 
+    try:
         app = QApplication(sys.argv)
         myWin = MainWindow()
 

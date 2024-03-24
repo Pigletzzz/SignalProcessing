@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import QWidget, QStackedWidget, QLabel
 from qfluentwidgets import Pivot
 
 from ui.Ui_FilterDesignerInterface import Ui_FilterDesignerInterface
+from view.FirFormSubView import FirFormSubView
+from view.IirFormSubView import IirFormSubView
 
 
 class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
@@ -13,8 +15,8 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         self.pivot = Pivot(self)
         self.stackedWidget = QStackedWidget(self)
 
-        self.firInterface = QLabel('Fir', self)
-        self.iirInterface = QLabel('iir', self)
+        self.firInterface = FirFormSubView(self.SimpleCardWidget)
+        self.iirInterface = IirFormSubView(self.SimpleCardWidget)
 
         self.initView()
 
@@ -33,7 +35,6 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
     # 添加子页面的方法
     def addSubInterface(self, widget: QLabel, objectName, text):
         widget.setObjectName(objectName)
-        widget.setAlignment(Qt.AlignCenter)
         self.stackedWidget.addWidget(widget)
         self.pivot.addItem(
             routeKey=objectName,
