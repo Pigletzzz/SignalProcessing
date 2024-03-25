@@ -28,9 +28,6 @@ class MainWindow(SplitFluentWindow):
 
         self.initNavigation()
 
-        self.widgets = [self.homeView, self.audioAnalysisView,
-                        self.filterDesignerView, self.audioFilterView]
-
     def initNavigation(self):
         self.addSubInterface(self.homeView, FluentIcon.HOME, '首页')
         self.addSubInterface(self.audioAnalysisView, FluentIcon.MICROPHONE, '语音分析')
@@ -46,4 +43,5 @@ class MainWindow(SplitFluentWindow):
         self.navigationInterface.setExpandWidth(280)
 
     def route(self, index: QWidget):
-        self.switchTo(self.widgets[index])
+        widget = self.stackedWidget.widget(index)
+        self.switchTo(widget)
