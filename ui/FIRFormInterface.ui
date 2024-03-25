@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>396</width>
-    <height>291</height>
+       <width>398</width>
+       <height>295</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,6 +24,16 @@
    <item row="0" column="1">
     <widget class="ComboBox" name="typesBox"/>
    </item>
+      <item row="2" column="0">
+          <widget class="BodyLabel" name="BodyLabel_5">
+              <property name="text">
+                  <string>采样率</string>
+              </property>
+          </widget>
+      </item>
+      <item row="2" column="1">
+          <widget class="LineEdit" name="sampleRateEdit"/>
+   </item>
    <item row="1" column="0">
     <widget class="BodyLabel" name="BodyLabel_4">
      <property name="text">
@@ -32,27 +42,27 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="LineEdit" name="lengthEdit"/>
+       <widget class="LineEdit" name="orderEdit"/>
    </item>
-   <item row="2" column="0">
+      <item row="3" column="0">
     <widget class="BodyLabel" name="BodyLabel_3">
      <property name="text">
       <string>截止频率</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
+      <item row="3" column="1">
+          <widget class="LineEdit" name="cutoffEdit"/>
+      </item>
+      <item row="4" column="0">
     <widget class="BodyLabel" name="BodyLabel">
      <property name="text">
       <string>窗函数</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="1">
+      <item row="4" column="1">
     <widget class="ComboBox" name="windowsBox"/>
-   </item>
-   <item row="2" column="1">
-    <widget class="LineEdit" name="LineEdit_2"/>
    </item>
   </layout>
  </widget>

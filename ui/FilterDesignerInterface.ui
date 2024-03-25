@@ -38,7 +38,7 @@
          <layout class="QVBoxLayout" name="verticalLayout_4"/>
         </item>
         <item>
-         <widget class="PrimaryPushButton" name="PrimaryPushButton">
+            <widget class="PrimaryPushButton" name="confirmButton">
           <property name="text">
            <string>确定</string>
           </property>

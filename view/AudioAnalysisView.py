@@ -12,11 +12,11 @@ from ui.Ui_AudioAnalysisInterface import Ui_AudioAnalysisInterface
 
 
 class AudioAnalysisView(QWidget, Ui_AudioAnalysisInterface):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, audioFileController: AudioFileController = None):
         super().__init__(parent=parent)
         self.setupUi(self)
 
-        self.audioFileController: AudioFileController = None
+        self.audioFileController = audioFileController
 
         self.initView()
         self.initEvent()

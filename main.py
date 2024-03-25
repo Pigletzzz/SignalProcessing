@@ -3,9 +3,11 @@ import sys
 from PyQt5.QtWidgets import QApplication
 
 from controller.AudioFileController import AudioFileController
+from controller.FilterController import FilterController
 from controller.route_controller import RouteController
 from convert2py import convertUi2Py
 from model.AudioModel import AudioModel
+from model.FilterModel import FilterModel
 from view.MainWindowView import MainWindow
 
 if __name__ == '__main__':
@@ -16,13 +18,16 @@ if __name__ == '__main__':
         app = QApplication(sys.argv)
         myWin = MainWindow()
 
-        AudioModel = AudioModel()
+        audioModel = AudioModel()
+        filterModel = FilterModel()
 
         routeController = RouteController(myWin)
-        audioFileController = AudioFileController(myWin.audioAnalysisView, myWin.audioFilterView, AudioModel)
+        audioFileController = AudioFileController(myWin.audioAnalysisView, myWin.audioFilterView, audioModel)
+        filterController = FilterController(myWin.filterDesignerView, filterModel)
 
         myWin.homeView.routeController = routeController
         myWin.audioAnalysisView.audioFileController = audioFileController
+        myWin.filterDesignerView.filterController = filterController
 
         myWin.show()
         sys.exit(app.exec_())

@@ -1,43 +1,30 @@
-from enum import Enum
+from scipy import signal
 
-
-# 滤波器类别枚举
-class FilterType(Enum):
-    FIR = 0
-    IIR = 1
-
-
-# 通带类型枚举
-class PassbandType(Enum):
-    LOWPASS = 'lowpass'
-    HIGHPASS = 'highpass'
-    BANDPASS = 'bandpass'
-    BANDSTOP = 'bandstop'
-
-
-# 响应函数枚举
-class ResponseType(Enum):
-    BANDPASS = 'bandpass'
-    BANDSTOP = 'bandstop'
-
-
-# 窗函数类型枚举
-class WindowType(Enum):
-    BOXCAR = 'boxcar'
-    TRIANG = 'triang'
-    HANNING = 'hann'
-    HAMMING = 'hamming'
-    BLACKMAN = 'blackmanharris'
-    KAISER = 'kaiser'
+from entity.Filter import Filter, FilterType, PassbandType, WindowType
 
 
 # 滤波器Model基类
 class FilterModel(object):
-    def __init__(self, filterType: FilterType, sampleRate: int, cutoffFreq,
-                 passband: PassbandType):
-        self.sampleRate = sampleRate
-        self.filterType = filterType
-        self.passband = passband
+    # def __init__(self, filterType: FilterType, sampleRate: int, cutoffFreq,
+    #              passband: PassbandType):
+    #     self.sampleRate = sampleRate
+    #     self.filterType = filterType
+    #     self.passband = passband
+    #
+    #     self.b = 1
+    #     self.a = 1
 
-        self.b = 1
-        self.a = 1
+    def __init__(self):
+        self.filter = None
+
+    def firDesign(self, sampleRate: int, cutoffFreq, passband: PassbandType, order: int, window: WindowType):
+        # TODO 处理输入数据异常
+        b = signal.firwin(order + 1, cutoffFreq / sampleRate, window=window.value, pass_zero=passband.value)
+        self.filter = Filter(FilterType.FIR, sampleRate, passband, b, 1)
+
+    def plot(self):
+        if self.filter is None:
+            # TODO 处理异常
+            print("你还没有生成滤波器")
+        else:
+            print('plot')
