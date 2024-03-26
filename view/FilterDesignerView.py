@@ -41,6 +41,13 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         self.stackedWidget.setCurrentWidget(self.firInterface)
         self.pivot.setCurrentItem(self.firInterface.objectName())
 
+        # 删除第二行截止频率
+        # 拿走一行并隐藏控件
+        # 使用removeRow会将widget删除，导致无法再次显示
+        self.firInterface.formLayout.takeRow(4)
+        self.firInterface.cutoffEditHigh.hide()
+        self.firInterface.BodyLabel_6.hide()
+
         # 初始化四个图表
         self.ampFigure = pyplot.figure()
         self.ampCanvas = FigureCanvasQTAgg(self.ampFigure)
@@ -67,6 +74,7 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         # 确认按钮点击事件
         self.confirmButton.clicked.connect(self.onConfirmClicked)
         # 选择带通/带阻滤波器时的ui处理
+        self.firInterface.typesBox.currentIndexChanged.connect(self.onTypeChanged)
 
     # 添加子页面的方法
     def addSubInterface(self, widget: QLabel, objectName, text):
@@ -82,6 +90,26 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
     def onCurrentIndexChanged(self, index):
         widget = self.stackedWidget.widget(index)
         self.pivot.setCurrentItem(widget.objectName())
+
+    def onTypeChanged(self):
+        if self.firInterface.typesBox.currentText() in ['高通',
+                                                        '低通'] and self.firInterface.formLayout.rowCount() == 6:
+            # 拿走一行并隐藏控件
+            # 使用removeRow会将widget删除，导致无法再次显示
+            self.firInterface.formLayout.takeRow(4)
+            self.firInterface.cutoffEditHigh.hide()
+            self.firInterface.BodyLabel_6.hide()
+        elif self.firInterface.typesBox.currentText() in ['带通',
+                                                          '带阻'] and self.firInterface.formLayout.rowCount() == 5:
+            # 增加一行并显示，因为先前隐藏了控件
+            self.firInterface.formLayout.insertRow(4, self.firInterface.BodyLabel_6, self.firInterface.cutoffEditHigh)
+            self.firInterface.cutoffEditHigh.show()
+            self.firInterface.BodyLabel_6.show()
+
+            # self.firInterface.formLayout.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.firInterface.BodyLabel)
+            # self.firInterface.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.firInterface.windowsBox)
+            # self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.firInterface.cutoffEditHigh)
+            # self.formLayout.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.firInterface.BodyLabel_6)
 
     def onConfirmClicked(self):
         # TODO 读取的时候注意是否为空

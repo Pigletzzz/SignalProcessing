@@ -47,6 +47,12 @@ class Ui_FIRFormInterface(object):
         self.windowsBox = ComboBox(FIRFormInterface)
         self.windowsBox.setObjectName("windowsBox")
         self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.windowsBox)
+        self.cutoffEditHigh = LineEdit(FIRFormInterface)
+        self.cutoffEditHigh.setObjectName("cutoffEditHigh")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.cutoffEditHigh)
+        self.BodyLabel_6 = BodyLabel(FIRFormInterface)
+        self.BodyLabel_6.setObjectName("BodyLabel_6")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.BodyLabel_6)
 
         self.retranslateUi(FIRFormInterface)
         QtCore.QMetaObject.connectSlotsByName(FIRFormInterface)
@@ -59,4 +65,5 @@ class Ui_FIRFormInterface(object):
         self.BodyLabel_4.setText(_translate("FIRFormInterface", "阶数"))
         self.BodyLabel_3.setText(_translate("FIRFormInterface", "截止频率"))
         self.BodyLabel.setText(_translate("FIRFormInterface", "窗函数"))
+        self.BodyLabel_6.setText(_translate("FIRFormInterface", "高频率"))
 from qfluentwidgets import BodyLabel, ComboBox, LineEdit
