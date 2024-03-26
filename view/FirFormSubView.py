@@ -57,5 +57,5 @@ class FirFormSubView(QWidget, Ui_FIRFormInterface):
                                       self.cutoffEditHigh)
             self.cutoffEditHigh.show()
             self.BodyLabel_6.show()
-            self.BodyLabel_3.setText(_translate("FIRFormInterface", "高频率"))
-            self.BodyLabel_6.setText(_translate("FIRFormInterface", "低频率"))
+            self.BodyLabel_3.setText(_translate("FIRFormInterface", "低频率"))
+            self.BodyLabel_6.setText(_translate("FIRFormInterface", "高频率"))

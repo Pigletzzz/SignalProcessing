@@ -17,9 +17,13 @@ class FilterModel(object):
     def __init__(self):
         self.filter = None
 
-    def firDesign(self, sampleRate: int, cutoffFreq, passband: PassbandType, order: int, window: WindowType):
-        # TODO 处理输入数据异常
-        b = signal.firwin(order + 1, cutoffFreq / sampleRate, window=window.value, pass_zero=passband.value)
+    def firDesign(self, sampleRate: int, cutoffFreq1, cutoffFreq2, passband: PassbandType, order: int,
+                  window: WindowType):
+        if passband == PassbandType.LOWPASS or passband == PassbandType.HIGHPASS:
+            cutoffFreq = cutoffFreq1 / sampleRate
+        else:
+            cutoffFreq = [cutoffFreq1 / sampleRate, cutoffFreq2 / sampleRate]
+        b = signal.firwin(order + 1, cutoffFreq, window=window.value, pass_zero=passband.value)
         self.filter = Filter(FilterType.FIR, sampleRate, passband, b, 1)
 
     def plot(self):

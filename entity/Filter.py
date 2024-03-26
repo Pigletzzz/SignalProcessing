@@ -42,6 +42,9 @@ class Filter(object):
         self.b = b
         self.a = a
 
+        print('b = ' + str(b))
+        print('a = ' + str(a))
+
         # 求出频率响应
         self.w, self.h = signal.freqz(self.b, self.a, worN=4096)
 

@@ -3,7 +3,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QStackedWidget, QLabel, QVBoxLayout
 from matplotlib import pyplot
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
-from qfluentwidgets import Pivot
+from qfluentwidgets import Pivot, InfoBar, InfoBarPosition
 
 from controller.FilterController import FilterController
 from ui.Ui_FilterDesignerInterface import Ui_FilterDesignerInterface
@@ -40,7 +40,6 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
 
         self.stackedWidget.setCurrentWidget(self.firInterface)
         self.pivot.setCurrentItem(self.firInterface.objectName())
-
 
         # 初始化四个图表
         self.ampFigure = pyplot.figure()
@@ -83,18 +82,20 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         widget = self.stackedWidget.widget(index)
         self.pivot.setCurrentItem(widget.objectName())
 
-
     def onConfirmClicked(self):
         # TODO 读取的时候注意是否为空
         if self.stackedWidget.currentIndex() == 0:
             # FIR滤波器设计
             # 获取输入的数据
-            order = int(self.firInterface.orderEdit.text())
-            sampleRate = int(self.firInterface.sampleRateEdit.text())
-            cutoffFreq1 = int(self.firInterface.cutoffEditLow.text())
+            passband = self.firInterface.typesBox.currentIndex()
+            window = self.firInterface.windowsBox.currentIndex()
+            order = self.firInterface.orderEdit.text()
+            sampleRate = self.firInterface.sampleRateEdit.text()
+            cutoffFreq1 = self.firInterface.cutoffEditLow.text()
+            cutoffFreq2 = self.firInterface.cutoffEditHigh.text()
 
             # 执行Fir滤波器设计
-            self.filterController.firDesign(sampleRate, order, cutoffFreq1)
+            self.filterController.firDesign(sampleRate, order, cutoffFreq1, cutoffFreq2, passband, window)
 
             # 执行Fir图表显示
             # self.ampFigure.
@@ -104,3 +105,14 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
 
     def onPlotShow(self):
         print('update')
+
+    def onFailedInfo(self, content: str):
+        InfoBar.error(
+            title='Error',
+            content=content,
+            orient=Qt.Horizontal,
+            isClosable=True,
+            position=InfoBarPosition.TOP,
+            duration=5000,
+            parent=self
+        )
