@@ -52,7 +52,7 @@
     </widget>
    </item>
       <item row="3" column="1">
-          <widget class="LineEdit" name="cutoffEdit"/>
+          <widget class="LineEdit" name="cutoffEditLow"/>
       </item>
       <item row="4" column="0">
     <widget class="BodyLabel" name="BodyLabel">

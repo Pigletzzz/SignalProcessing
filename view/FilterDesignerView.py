@@ -1,5 +1,8 @@
+import numpy as np
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QStackedWidget, QLabel
+from PyQt5.QtWidgets import QWidget, QStackedWidget, QLabel, QVBoxLayout
+from matplotlib import pyplot
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from qfluentwidgets import Pivot
 
 from controller.FilterController import FilterController
@@ -28,6 +31,7 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
 
     # 初始化布局
     def initView(self):
+        # 初始化菜单栏
         self.horizontalLayout_4.addWidget(self.pivot, 0, Qt.AlignHCenter)
         self.verticalLayout_4.addWidget(self.stackedWidget)
 
@@ -37,12 +41,32 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         self.stackedWidget.setCurrentWidget(self.firInterface)
         self.pivot.setCurrentItem(self.firInterface.objectName())
 
+        # 初始化四个图表
+        self.ampFigure = pyplot.figure()
+        self.ampCanvas = FigureCanvasQTAgg(self.ampFigure)
+        layout = QVBoxLayout()  # 垂直布局
+        layout.addWidget(self.ampCanvas)
+        self.amplitudePlotWidget.setLayout(layout)
+
+        # 测试代码
+        ax = self.ampFigure.subplots()
+        t = np.linspace(0, 2 * np.pi, 50)
+        ax.plot(t, np.sin(t))
+        self.ampCanvas.draw()
+
+        self.phaseFigure = pyplot.figure()
+        self.phaseCanvas = FigureCanvasQTAgg(self.phaseFigure)
+        layout = QVBoxLayout()  # 垂直布局
+        layout.addWidget(self.phaseCanvas)
+        self.amplitudePlotWidget.setLayout(layout)
+
     # 初始化点击事件
     def initEvent(self):
         # 导航栏点击事件
         self.stackedWidget.currentChanged.connect(self.onCurrentIndexChanged)
         # 确认按钮点击事件
         self.confirmButton.clicked.connect(self.onConfirmClicked)
+        # 选择带通/带阻滤波器时的ui处理
 
     # 添加子页面的方法
     def addSubInterface(self, widget: QLabel, objectName, text):
@@ -66,10 +90,16 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
             # 获取输入的数据
             order = int(self.firInterface.orderEdit.text())
             sampleRate = int(self.firInterface.sampleRateEdit.text())
-            cutoffFreq = int(self.firInterface.cutoffEdit.text())
+            cutoffFreq1 = int(self.firInterface.cutoffEditLow.text())
 
             # 执行Fir滤波器设计
-            self.filterController.firDesign(sampleRate, order, cutoffFreq)
+            self.filterController.firDesign(sampleRate, order, cutoffFreq1)
+
+            # 执行Fir图表显示
+            # self.ampFigure.
         else:
             # IIR滤波器设计
-            print()
+            print('iir designer')
+
+    def onPlotShow(self):
+        print('update')

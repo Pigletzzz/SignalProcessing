@@ -12,3 +12,6 @@ class FilterController(object):
     def firDesign(self, sampleRate, order, cutoffFreq):
         # TODO 判断输入合法性
         self.filterModel.firDesign(sampleRate, cutoffFreq, PassbandType.LOWPASS, order, WindowType.BOXCAR)
+
+    def updatePlot(self):
+        print('update')

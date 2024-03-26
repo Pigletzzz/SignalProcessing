@@ -27,4 +27,5 @@ class FilterModel(object):
             # TODO 处理异常
             print("你还没有生成滤波器")
         else:
-            print('plot')
+            # 幅度响应
+            print("11")

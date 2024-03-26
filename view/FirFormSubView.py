@@ -26,4 +26,4 @@ class FirFormSubView(QWidget, Ui_FIRFormInterface):
         validator.setBottom(0)
         self.sampleRateEdit.setValidator(validator)
         self.orderEdit.setValidator(validator)
-        self.cutoffEdit.setValidator(validator)
+        self.cutoffEditLow.setValidator(validator)

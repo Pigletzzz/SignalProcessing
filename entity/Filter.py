@@ -1,5 +1,7 @@
 from enum import Enum
 
+from scipy import signal
+
 
 # 滤波器类别枚举
 class FilterType(Enum):
@@ -40,5 +42,8 @@ class Filter(object):
         self.b = b
         self.a = a
 
-    def getFun(self):
-        return self.b, self.a
+        # 求出频率响应
+        self.w, self.h = signal.freqz(self.b, self.a, worN=4096)
+
+    def getFreqz(self):
+        return self.w, self.h
