@@ -58,7 +58,7 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         self.phaseCanvas = FigureCanvasQTAgg(self.phaseFigure)
         layout = QVBoxLayout()  # 垂直布局
         layout.addWidget(self.phaseCanvas)
-        self.amplitudePlotWidget.setLayout(layout)
+        self.phasePlotWidget.setLayout(layout)
 
     # 初始化点击事件
     def initEvent(self):
@@ -97,14 +97,34 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
             # 执行Fir滤波器设计
             self.filterController.firDesign(sampleRate, order, cutoffFreq1, cutoffFreq2, passband, window)
 
-            # 执行Fir图表显示
-            # self.ampFigure.
+
         else:
             # IIR滤波器设计
             print('iir designer')
 
-    def onPlotShow(self):
-        print('update')
+    def onPlotUpdate(self, w, h, fs, nfft):
+        f = np.linspace(0, fs, nfft)
+        h_db = 20 * np.log10(np.abs(h))  # 幅度响应（dB）
+        h_angle = np.unwrap(np.angle(h))  # 相位响应（弧度）
+
+        # 执行Fir图表显示
+        self.ampFigure.clf()
+        ampPlot = self.ampFigure.subplots()
+        ampPlot.plot(f[:nfft // 2], h_db[:nfft // 2])
+        ampPlot.set_title('Amplitude Response (dB)')
+        ampPlot.set_xlabel('Frequency (Hz)')
+        ampPlot.set_ylabel('Magnitude')
+        ampPlot.grid(True)
+        self.ampCanvas.draw()
+
+        self.phaseFigure.clf()
+        phasePlot = self.phaseFigure.subplots()
+        phasePlot.plot(f[:nfft // 2], h_angle[:nfft // 2])
+        phasePlot.set_title('Phase Response (radians)')
+        phasePlot.set_xlabel('Frequency (Hz)')
+        phasePlot.set_ylabel('Phase')
+        phasePlot.grid(True)
+        self.phaseCanvas.draw()
 
     def onFailedInfo(self, content: str):
         InfoBar.error(

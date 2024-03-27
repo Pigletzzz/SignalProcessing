@@ -27,7 +27,7 @@ class FilterController(object):
         if passband > 1:
             print('CutoffFrequency: ' + cutoffFreq2 + 'Hz')
         print('Order: ' + order)
-        print('Window: ' + self.windows[window].value + '\n')
+        print('Window: ' + self.windows[window].value + '')
 
         try:
             # 处理可能未填写的高频率
@@ -38,6 +38,11 @@ class FilterController(object):
             # 调用filterModel的fir设计方法进行fir滤波器设计
             self.filterModel.firDesign(int(sampleRate), int(cutoffFreq1), cutoffFreqHigh, self.passbands[passband],
                                        int(order), self.windows[window])
+            print("Successfully!\n")
+            # 成功，调用view的方法更新图表
+            # print(str())
+            w, h, fs, nfft = self.filterModel.getFreqz()
+            self.filterDesignerView.onPlotUpdate(w, h, fs, nfft)
         except ValueError as e:
             # 弹出弹窗
             self.filterDesignerView.onFailedInfo(str(e))
