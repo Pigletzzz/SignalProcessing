@@ -18,7 +18,7 @@ class FirFormSubView(QWidget, Ui_FIRFormInterface):
         self.typesBox.addItems(typeItems)
         self.typesBox.setCurrentIndex(-1)
 
-        windowItems = ['矩形窗', '巴特列特窗', '汉宁窗', '海明窗', '布拉克曼窗', '凯泽窗']
+        windowItems = ['矩形窗', '三角窗', '汉宁窗', '海明窗', '布拉克曼窗', '凯泽窗']
         self.windowsBox.addItems(windowItems)
         self.windowsBox.setCurrentIndex(-1)
 
