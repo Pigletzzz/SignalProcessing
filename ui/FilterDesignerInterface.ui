@@ -53,44 +53,10 @@
     <widget class="SimpleCardWidget" name="SimpleCardWidget_2">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="StrongBodyLabel" name="StrongBodyLabel">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Strong body label</string>
-        </property>
-       </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout_3" stretch=""/>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1">
-        <item>
-            <widget class="SimpleCardWidget" name="amplitudePlotWidget"/>
-        </item>
-        <item>
-            <widget class="SimpleCardWidget" name="phasePlotWidget">
-                <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                    </sizepolicy>
-                </property>
-            </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1">
-        <item>
-         <widget class="QGraphicsView" name="graphicsView_2"/>
-        </item>
-        <item>
-         <widget class="QGraphicsView" name="graphicsView_4"/>
-        </item>
-       </layout>
+          <layout class="QHBoxLayout" name="horizontalLayout_2" stretch=""/>
       </item>
      </layout>
     </widget>
@@ -119,11 +85,6 @@
    <extends>CardWidget</extends>
    <header>qfluentwidgets</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>StrongBodyLabel</class>
-   <extends>QLabel</extends>
-   <header>qfluentwidgets</header>
   </customwidget>
  </customwidgets>
  <resources/>

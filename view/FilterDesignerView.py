@@ -1,6 +1,6 @@
 import numpy as np
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QStackedWidget, QLabel, QVBoxLayout
+from PyQt5.QtWidgets import QWidget, QStackedWidget, QLabel
 from matplotlib import pyplot
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from qfluentwidgets import Pivot, InfoBar, InfoBarPosition
@@ -14,6 +14,14 @@ from view.IirFormSubView import IirFormSubView
 class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
     def __init__(self, parent=None, filterController: FilterController = None):
         super().__init__(parent=parent)
+        self.ampFigure = None
+        self.ampCanvas = None
+        self.phaseFigure = None
+        self.phaseCanvas = None
+        self.groupDelayFigure = None
+        self.groupDelayCanvas = None
+        self.zeroPoleFigure = None
+        self.zeroPoleCanvas = None
         self.setupUi(self)
 
         self.filterController = filterController
@@ -44,21 +52,20 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         # 初始化四个图表
         self.ampFigure = pyplot.figure()
         self.ampCanvas = FigureCanvasQTAgg(self.ampFigure)
-        layout = QVBoxLayout()  # 垂直布局
-        layout.addWidget(self.ampCanvas)
-        self.amplitudePlotWidget.setLayout(layout)
-
-        # 测试代码
-        ax = self.ampFigure.subplots()
-        t = np.linspace(0, 2 * np.pi, 50)
-        ax.plot(t, np.sin(t))
-        self.ampCanvas.draw()
+        self.horizontalLayout_3.addWidget(self.ampCanvas)
 
         self.phaseFigure = pyplot.figure()
         self.phaseCanvas = FigureCanvasQTAgg(self.phaseFigure)
-        layout = QVBoxLayout()  # 垂直布局
-        layout.addWidget(self.phaseCanvas)
-        self.phasePlotWidget.setLayout(layout)
+        self.horizontalLayout_3.addWidget(self.phaseCanvas)
+
+        self.groupDelayFigure = pyplot.figure()
+        self.groupDelayCanvas = FigureCanvasQTAgg(self.groupDelayFigure)
+        self.horizontalLayout_2.addWidget(self.groupDelayCanvas)
+
+        self.zeroPoleFigure = pyplot.figure()
+        self.zeroPoleCanvas = FigureCanvasQTAgg(self.zeroPoleFigure)
+        self.horizontalLayout_2.addWidget(self.zeroPoleCanvas)
+
 
     # 初始化点击事件
     def initEvent(self):
@@ -97,7 +104,6 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
             # 执行Fir滤波器设计
             self.filterController.firDesign(sampleRate, order, cutoffFreq1, cutoffFreq2, passband, window)
 
-
         else:
             # IIR滤波器设计
             print('iir designer')
@@ -106,8 +112,10 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         f = np.linspace(0, fs, nfft)
         h_db = 20 * np.log10(np.abs(h))  # 幅度响应（dB）
         h_angle = np.unwrap(np.angle(h))  # 相位响应（弧度）
+        group_delay = -np.diff(h_angle) / (2.0 * np.pi) * fs / nfft  # 群延迟响应（秒）
 
         # 执行Fir图表显示
+        # 绘制幅度响应
         self.ampFigure.clf()
         ampPlot = self.ampFigure.subplots()
         ampPlot.plot(f[:nfft // 2], h_db[:nfft // 2])
@@ -117,6 +125,7 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         ampPlot.grid(True)
         self.ampCanvas.draw()
 
+        # 绘制相位响应
         self.phaseFigure.clf()
         phasePlot = self.phaseFigure.subplots()
         phasePlot.plot(f[:nfft // 2], h_angle[:nfft // 2])
@@ -125,6 +134,20 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         phasePlot.set_ylabel('Phase')
         phasePlot.grid(True)
         self.phaseCanvas.draw()
+
+        # 绘制群延迟响应
+        self.groupDelayFigure.clf()
+        groupDelayPlot = self.groupDelayFigure.subplots()
+        groupDelayPlot.plot(f[1:nfft // 2], group_delay[1:nfft // 2])
+        groupDelayPlot.set_title('Group Delay Response (seconds)')
+        groupDelayPlot.set_xlabel('Frequency (Hz)')
+        groupDelayPlot.set_ylabel('Group Delay')
+        groupDelayPlot.grid(True)
+        self.groupDelayCanvas.draw()
+
+        # 绘制零极点分布
+        self.zeroPoleFigure.clf()
+        zeroPolePlot = self.zeroPoleFigure.subplots()
 
     def onFailedInfo(self, content: str):
         InfoBar.error(
