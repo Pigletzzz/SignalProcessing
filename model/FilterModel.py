@@ -43,4 +43,4 @@ class FilterModel(object):
 
     # 获取频率响应
     def getFreqz(self):
-        return self.w, self.h, self.sampleRate, self.nfft
+        return self.b, self.a, self.w, self.h, self.sampleRate, self.nfft

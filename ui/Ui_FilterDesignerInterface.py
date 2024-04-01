@@ -55,6 +55,4 @@ class Ui_FilterDesignerInterface(object):
         _translate = QtCore.QCoreApplication.translate
         FilterDesignerInterface.setWindowTitle(_translate("FilterDesignerInterface", "Form"))
         self.confirmButton.setText(_translate("FilterDesignerInterface", "确定"))
-
-
 from qfluentwidgets import PrimaryPushButton, SimpleCardWidget

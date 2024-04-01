@@ -20,9 +20,6 @@ class Ui_FIRFormInterface(object):
         self.BodyLabel_2 = BodyLabel(FIRFormInterface)
         self.BodyLabel_2.setObjectName("BodyLabel_2")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.BodyLabel_2)
-        self.typesBox = ComboBox(FIRFormInterface)
-        self.typesBox.setObjectName("typesBox")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.typesBox)
         self.BodyLabel_5 = BodyLabel(FIRFormInterface)
         self.BodyLabel_5.setObjectName("BodyLabel_5")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.BodyLabel_5)
@@ -53,6 +50,9 @@ class Ui_FIRFormInterface(object):
         self.BodyLabel_6 = BodyLabel(FIRFormInterface)
         self.BodyLabel_6.setObjectName("BodyLabel_6")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.BodyLabel_6)
+        self.passbandsBox = ComboBox(FIRFormInterface)
+        self.passbandsBox.setObjectName("passbandsBox")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.passbandsBox)
 
         self.retranslateUi(FIRFormInterface)
         QtCore.QMetaObject.connectSlotsByName(FIRFormInterface)
@@ -60,7 +60,7 @@ class Ui_FIRFormInterface(object):
     def retranslateUi(self, FIRFormInterface):
         _translate = QtCore.QCoreApplication.translate
         FIRFormInterface.setWindowTitle(_translate("FIRFormInterface", "Form"))
-        self.BodyLabel_2.setText(_translate("FIRFormInterface", "类型"))
+        self.BodyLabel_2.setText(_translate("FIRFormInterface", "通带"))
         self.BodyLabel_5.setText(_translate("FIRFormInterface", "采样率"))
         self.BodyLabel_4.setText(_translate("FIRFormInterface", "阶数"))
         self.BodyLabel_3.setText(_translate("FIRFormInterface", "截止频率"))

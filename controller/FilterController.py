@@ -41,8 +41,8 @@ class FilterController(object):
             print("Successfully!\n")
             # 成功，调用view的方法更新图表
             # print(str())
-            w, h, fs, nfft = self.filterModel.getFreqz()
-            self.filterDesignerView.onPlotUpdate(w, h, fs, nfft)
+            b, a, w, h, fs, nfft = self.filterModel.getFreqz()
+            self.filterDesignerView.onPlotUpdate(b, a, w, h, fs, nfft)
         except ValueError as e:
             # 弹出弹窗
             self.filterDesignerView.onFailedInfo(str(e))

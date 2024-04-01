@@ -15,7 +15,7 @@ class MainWindow(SplitFluentWindow):
         self.filterDesignerView = FilterDesignerView()
         self.audioFilterView = AudioFilterView()
 
-        self.resize(800, 600)
+        self.resize(1200, 800)
         self.setWindowTitle('Signal Processing')
         # self.setWindowIcon(QIcon(''))
         # 获取屏幕坐标系

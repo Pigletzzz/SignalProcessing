@@ -66,7 +66,6 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         self.zeroPoleCanvas = FigureCanvasQTAgg(self.zeroPoleFigure)
         self.horizontalLayout_2.addWidget(self.zeroPoleCanvas)
 
-
     # 初始化点击事件
     def initEvent(self):
         # 导航栏点击事件
@@ -90,11 +89,10 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         self.pivot.setCurrentItem(widget.objectName())
 
     def onConfirmClicked(self):
-        # TODO 读取的时候注意是否为空
         if self.stackedWidget.currentIndex() == 0:
             # FIR滤波器设计
             # 获取输入的数据
-            passband = self.firInterface.typesBox.currentIndex()
+            passband = self.firInterface.passbandsBox.currentIndex()
             window = self.firInterface.windowsBox.currentIndex()
             order = self.firInterface.orderEdit.text()
             sampleRate = self.firInterface.sampleRateEdit.text()
@@ -108,11 +106,12 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
             # IIR滤波器设计
             print('iir designer')
 
-    def onPlotUpdate(self, w, h, fs, nfft):
+    def onPlotUpdate(self, b, a, w, h, fs, nfft):
         f = np.linspace(0, fs, nfft)
         h_db = 20 * np.log10(np.abs(h))  # 幅度响应（dB）
         h_angle = np.unwrap(np.angle(h))  # 相位响应（弧度）
         group_delay = -np.diff(h_angle) / (2.0 * np.pi) * fs / nfft  # 群延迟响应（秒）
+        zeros = np.roots(b)
 
         # 执行Fir图表显示
         # 绘制幅度响应
@@ -148,6 +147,14 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         # 绘制零极点分布
         self.zeroPoleFigure.clf()
         zeroPolePlot = self.zeroPoleFigure.subplots()
+        zeroPolePlot.plot(zeros.real, zeros.imag, 'ro')
+        zeroPolePlot.set_title('Zero-Pole Plot')
+        zeroPolePlot.set_xlabel('Real')
+        zeroPolePlot.set_ylabel('Imag')
+        zeroPolePlot.grid(True)
+        zeroPolePlot.axis('equal')  # 保持x和y轴等比例
+        self.zeroPoleCanvas.draw()
+
 
     def onFailedInfo(self, content: str):
         InfoBar.error(
