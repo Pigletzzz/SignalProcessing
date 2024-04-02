@@ -29,3 +29,10 @@ class WindowType(Enum):
     HAMMING = 'hamming'
     BLACKMAN = 'blackmanharris'
     KAISER = 'kaiser'
+
+
+class ProtoType(Enum):
+    BUTTERWORTH = 'Butterworth'
+    CHEBYSHEV1 = 'Chebyshev-1'
+    CHEBYSHEV2 = 'Chebyshev-2'
+    ELLIPSE = 'Ellipse'

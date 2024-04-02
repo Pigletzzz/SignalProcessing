@@ -1,5 +1,5 @@
 from PyQt5.QtCore import QCoreApplication
-from PyQt5.QtGui import QIntValidator
+from PyQt5.QtGui import QIntValidator, QDoubleValidator
 from PyQt5.QtWidgets import QWidget
 
 from ui.Ui_IIRFormInterface import Ui_IIRFormInterface
@@ -19,20 +19,22 @@ class IirFormSubView(QWidget, Ui_IIRFormInterface):
         self.passbandsBox.setCurrentIndex(-1)
 
         protoTypesItems = ['巴特沃兹', '切比雪夫-Ⅰ', '切比雪夫-Ⅱ', '椭圆']
-        self.protoTypeBox.addItems(protoTypesItems)
-        self.protoTypeBox.setCurrentIndex(-1)
+        self.protoTypesBox.addItems(protoTypesItems)
+        self.protoTypesBox.setCurrentIndex(-1)
 
         # 为输入框配置限制器
         # TODO 找另一种方法替换限制器
-        validator = QIntValidator(self)
-        validator.setBottom(0)
-        self.sampleRateEdit.setValidator(validator)
-        self.passbandFreqHighEdit.setValidator(validator)
-        self.passbandFreqLowEdit.setValidator(validator)
-        self.stopbandFreqHighEdit.setValidator(validator)
-        self.stopbandFreqLowEdit.setValidator(validator)
-        self.passbandRippleEdit.setValidator(validator)
-        self.stopbandAttenuationEdit.setValidator(validator)
+        intValidator = QIntValidator(self)
+        doubleValidator = QDoubleValidator()
+        intValidator.setBottom(0)
+        doubleValidator.setBottom(0)
+        self.sampleRateEdit.setValidator(intValidator)
+        self.passbandFreqHighEdit.setValidator(intValidator)
+        self.passbandFreqLowEdit.setValidator(intValidator)
+        self.stopbandFreqHighEdit.setValidator(intValidator)
+        self.stopbandFreqLowEdit.setValidator(intValidator)
+        self.passbandRippleEdit.setValidator(doubleValidator)
+        self.stopbandAttenuationEdit.setValidator(doubleValidator)
 
         # 隐藏通带高频率和阻带高频率
         self.formLayout.takeRow(3)

@@ -101,10 +101,20 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
 
             # 执行Fir滤波器设计
             self.filterController.firDesign(sampleRate, order, cutoffFreq1, cutoffFreq2, passband, window)
-
         else:
             # IIR滤波器设计
             print('iir designer')
+            passband = self.iirInterface.passbandsBox.currentIndex()
+            sampleRate = self.iirInterface.sampleRateEdit.text()
+            passbandLow = self.iirInterface.passbandFreqLowEdit.text()
+            passbandHigh = self.iirInterface.passbandFreqHighEdit.text()
+            stopbandLow = self.iirInterface.stopbandFreqLowEdit.text()
+            stopbandHigh = self.iirInterface.stopbandFreqHighEdit.text()
+            passbandRipple = self.iirInterface.passbandRippleEdit.text()
+            stopbandAttenuation = self.iirInterface.stopbandAttenuationEdit.text()
+            protoTypes = self.iirInterface.protoTypesBox.currentIndex()
+            self.filterController.iirDesign(sampleRate, passbandLow, passbandHigh, stopbandLow,
+                                            stopbandHigh, passbandRipple, stopbandAttenuation, passband, protoTypes)
 
     def onPlotUpdate(self, b, a, w, h, fs, nfft):
         f = np.linspace(0, fs, nfft)
@@ -154,7 +164,6 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         zeroPolePlot.grid(True)
         zeroPolePlot.axis('equal')  # 保持x和y轴等比例
         self.zeroPoleCanvas.draw()
-
 
     def onFailedInfo(self, content: str):
         InfoBar.error(
