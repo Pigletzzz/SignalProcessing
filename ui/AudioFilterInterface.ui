@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>666</width>
-    <height>475</height>
+       <width>921</width>
+       <height>669</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -39,6 +39,12 @@
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <widget class="StrongBodyLabel" name="StrongBodyLabel">
+             <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                 </sizepolicy>
+             </property>
           <property name="text">
            <string>音频选择</string>
           </property>
@@ -63,7 +69,7 @@
         <item>
          <widget class="StrongBodyLabel" name="StrongBodyLabel_2">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -74,7 +80,64 @@
          </widget>
         </item>
         <item>
-         <layout class="QFormLayout" name="formLayout"/>
+            <layout class="QFormLayout" name="formLayout">
+                <item row="0" column="0">
+                    <widget class="BodyLabel" name="BodyLabel">
+                        <property name="text">
+                            <string>类型</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="1" column="0">
+                    <widget class="BodyLabel" name="BodyLabel_2">
+                        <property name="text">
+                            <string>通带</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="2" column="0">
+                    <widget class="BodyLabel" name="BodyLabel_3">
+                        <property name="text">
+                            <string>采样率</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="0" column="1">
+                    <widget class="BodyLabel" name="BodyLabel_4">
+                        <property name="text">
+                            <string>Body label</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="1" column="1">
+                    <widget class="BodyLabel" name="BodyLabel_5">
+                        <property name="text">
+                            <string>Body label</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="2" column="1">
+                    <widget class="BodyLabel" name="BodyLabel_6">
+                        <property name="text">
+                            <string>Body label</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="3" column="0">
+                    <widget class="BodyLabel" name="BodyLabel_7">
+                        <property name="text">
+                            <string>截止频率</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="3" column="1">
+                    <widget class="BodyLabel" name="BodyLabel_8">
+                        <property name="text">
+                            <string>Body label</string>
+                        </property>
+                    </widget>
+                </item>
+            </layout>
         </item>
         <item>
          <widget class="PrimaryPushButton" name="PrimaryPushButton">
@@ -115,6 +178,11 @@
    <extends>CardWidget</extends>
    <header>qfluentwidgets</header>
    <container>1</container>
+  </customwidget>
+     <customwidget>
+         <class>BodyLabel</class>
+         <extends>QLabel</extends>
+         <header>qfluentwidgets</header>
   </customwidget>
   <customwidget>
    <class>StrongBodyLabel</class>

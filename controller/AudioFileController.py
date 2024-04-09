@@ -19,7 +19,10 @@ class AudioFileController:
         # 这里可以添加更多的音频处理逻辑
         voice = Audio(y, os.path.basename(fileName), int(len(y) / sr), os.path.dirname(fileName), int(sr),
                       os.path.getsize(fileName))
+        # 将对象存至Modal类内
         self.addFile(voice)
+        # 回调画图
+        self.audioAnalysisView.onPlotUpdate(y, sr)
 
     def addFile(self, audio: Audio):
         # 在model中添加项
@@ -29,4 +32,7 @@ class AudioFileController:
         self.audioFilterView.addTabItem(audio)
 
     def selectFile(self, index: int):
-        self.audioAnalysisView.setupAudio(self.audioModel.getAudio(index))
+        audio = self.audioModel.getAudio(index)
+        self.audioAnalysisView.setupAudio(audio)
+        # 回调画图
+        self.audioAnalysisView.onPlotUpdate(audio.voiceNum, audio.sampleRate)

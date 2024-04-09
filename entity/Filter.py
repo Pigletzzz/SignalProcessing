@@ -15,12 +15,6 @@ class PassbandType(Enum):
     BANDSTOP = 'bandstop'
 
 
-# 响应函数枚举
-class ResponseType(Enum):
-    BANDPASS = 'bandpass'
-    BANDSTOP = 'bandstop'
-
-
 # 窗函数类型枚举
 class WindowType(Enum):
     BOXCAR = 'boxcar'

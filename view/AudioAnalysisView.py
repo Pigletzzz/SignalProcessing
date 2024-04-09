@@ -1,7 +1,11 @@
+import librosa.display
+import numpy as np
 from PyQt5 import QtCore
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QResizeEvent
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem, QFileDialog, QAbstractItemView
+from matplotlib import pyplot
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from qfluentwidgets import FluentIcon
 from qfluentwidgets.multimedia import SimpleMediaPlayBar
 
@@ -18,6 +22,14 @@ class AudioAnalysisView(QWidget, Ui_AudioAnalysisInterface):
 
         self.audioFileController = audioFileController
 
+        # 声明图表相关成员变量
+        self.stftFigure = pyplot.figure()
+        self.stftCanvas = FigureCanvasQTAgg(self.stftFigure)
+        self.timeFigure = pyplot.figure()
+        self.timeCanvas = FigureCanvasQTAgg(self.timeFigure)
+
+        self.simplePlayerBar = SimpleMediaPlayBar(self)
+
         self.initView()
         self.initEvent()
 
@@ -31,8 +43,12 @@ class AudioAnalysisView(QWidget, Ui_AudioAnalysisInterface):
         self.filesTable.verticalHeader().hide()
         # 关闭双击编辑功能
         self.filesTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
+
+        # 初始化图表
+        self.verticalLayout_5.addWidget(self.stftCanvas)
+        self.verticalLayout_5.addWidget(self.timeCanvas)
+
         # 初始化音频bar
-        self.simplePlayerBar = SimpleMediaPlayBar(self)
         self.verticalLayout_4.addWidget(self.simplePlayerBar)
 
     # 初始化事件
@@ -85,3 +101,18 @@ class AudioAnalysisView(QWidget, Ui_AudioAnalysisInterface):
         maxWidth = self.SimpleCardWidget.width() - self.StrongBodyLabel_6.width() - 24
         self.fileNameLabel.setMaximumWidth(maxWidth if maxWidth > 100 else 100)
         self.fileDirLabel.setMaximumWidth(maxWidth if maxWidth > 100 else 100)
+
+    # 画图的函数
+    def onPlotUpdate(self, y, sr):
+        # 画出频域波形
+        self.stftFigure.clf()
+        stftPlot = self.stftFigure.subplots()
+        D = librosa.amplitude_to_db(np.abs(librosa.stft(y)), ref=np.max)
+        librosa.display.specshow(D, sr=sr, x_axis='time', y_axis='linear', ax=stftPlot)
+        self.stftCanvas.draw()
+
+        # 画出时域波形
+        self.timeFigure.clf()
+        timePlot = self.timeFigure.subplots()
+        librosa.display.waveshow(y, sr=sr, ax=timePlot)
+        self.timeCanvas.draw()

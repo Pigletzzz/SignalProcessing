@@ -237,13 +237,7 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QGraphicsView" name="graphicsView"/>
-        </item>
-        <item>
-         <widget class="QGraphicsView" name="graphicsView_3"/>
-        </item>
-        <item>
-         <widget class="QGraphicsView" name="graphicsView_2"/>
+            <layout class="QVBoxLayout" name="verticalLayout_5"/>
         </item>
        </layout>
       </widget>
