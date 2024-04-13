@@ -24,7 +24,7 @@ if __name__ == '__main__':
         # 声明Controller类
         routeController = RouteController(myWin)
         audioFileController = AudioFileController(myWin.audioAnalysisView, myWin.audioFilterView, audioModel)
-        filterController = FilterController(myWin.filterDesignerView, filterModel)
+        filterController = FilterController(myWin.filterDesignerView, myWin.audioFilterView, filterModel)
 
         # 传递Controller
         myWin.homeView.routeController = routeController

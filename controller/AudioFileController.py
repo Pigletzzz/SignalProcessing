@@ -29,7 +29,7 @@ class AudioFileController:
         self.audioModel.addAudio(audio)
         # 为view中的table添加一项
         self.audioAnalysisView.addTabItem(audio)
-        self.audioFilterView.addTabItem(audio)
+        self.audioFilterView.addAudio(audio)
 
     def selectFile(self, index: int):
         audio = self.audioModel.getAudio(index)

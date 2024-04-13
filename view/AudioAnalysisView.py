@@ -1,7 +1,6 @@
 import librosa.display
 import numpy as np
-from PyQt5 import QtCore
-from PyQt5.QtCore import QUrl
+from PyQt5.QtCore import QUrl, QCoreApplication
 from PyQt5.QtGui import QResizeEvent
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem, QFileDialog, QAbstractItemView
 from matplotlib import pyplot
@@ -82,7 +81,7 @@ class AudioAnalysisView(QWidget, Ui_AudioAnalysisInterface):
 
     def setupAudio(self, audio: Audio):
         # 进行详细信息的显示
-        _translate = QtCore.QCoreApplication.translate
+        _translate = QCoreApplication.translate
         self.fileNameLabel.setText(_translate("AudioAnalysisInterface", audio.title))
         self.fileDirLabel.setText(_translate("AudioAnalysisInterface", audio.path))
         self.fileSizeLabel.setText(_translate("AudioAnalysisInterface", byteToMB(audio.size)))

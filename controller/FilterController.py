@@ -4,8 +4,9 @@ from model.FilterModel import FilterModel
 
 # 用于执行滤波相关操作的Controller
 class FilterController(object):
-    def __init__(self, filterDesignerView, filterModel: FilterModel):
+    def __init__(self, filterDesignerView, audioFilterView, filterModel: FilterModel):
         self.filterDesignerView = filterDesignerView
+        self.audioFilterView = audioFilterView
         self.filterModel = filterModel
         self.passbands = [PassbandType.LOWPASS, PassbandType.HIGHPASS, PassbandType.BANDPASS, PassbandType.BANDSTOP]
         self.windows = [WindowType.BOXCAR, WindowType.TRIANG, WindowType.HANNING, WindowType.HAMMING,
@@ -43,6 +44,10 @@ class FilterController(object):
             # print(str())
             b, a, w, h, fs, nfft = self.filterModel.getFreqz()
             self.filterDesignerView.onPlotUpdate(b, a, w, h, fs, nfft)
+
+            # 更新AudioFilterView中的信息
+            filterType, passband, sr, cutoff = self.filterModel.getInfo()
+            self.audioFilterView.addFilter(filterType, passband, sr, cutoff)
         except ValueError as e:
             # 弹出弹窗
             self.filterDesignerView.onFailedInfo(str(e))
@@ -83,14 +88,16 @@ class FilterController(object):
                                        float(passbandRipple), float(stopbandAttenuation), self.passbands[passband],
                                        self.protoTypes[protoType])
             print("Successfully!\n")
+
             # 成功，调用view的方法更新图表
             # print(str())
             b, a, w, h, fs, nfft = self.filterModel.getFreqz()
             self.filterDesignerView.onPlotUpdate(b, a, w, h, fs, nfft)
-        except ValueError as e:
+
+            # 更新AudioFilterView中的信息
+            filterType, passband, sr, cutoff = self.filterModel.getInfo()
+            self.audioFilterView.addFilter(filterType, passband, sr, cutoff)
+        except Exception as e:
             # 弹出弹窗
             self.filterDesignerView.onFailedInfo(str(e))
             print(e)
-
-    def updatePlot(self):
-        print('update')

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1026</width>
-    <height>766</height>
+       <width>1034</width>
+       <height>783</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,19 +29,6 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="TitleLabel" name="TitleLabel">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-           <string>Audio Analysis</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="SimpleCardWidget" name="SimpleCardWidget_3">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -56,6 +43,12 @@
         </size>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="leftMargin">
+               <number>12</number>
+           </property>
+           <property name="rightMargin">
+               <number>12</number>
+           </property>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
@@ -101,6 +94,12 @@
         <property name="formAlignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
         </property>
+           <property name="leftMargin">
+               <number>12</number>
+           </property>
+           <property name="rightMargin">
+               <number>12</number>
+           </property>
         <item row="0" column="0">
          <widget class="StrongBodyLabel" name="StrongBodyLabel_6">
           <property name="sizePolicy">
@@ -137,7 +136,7 @@
         <item row="2" column="1">
          <widget class="BodyLabel" name="fileDirLabel">
           <property name="text">
-           <string>Body label</string>
+              <string/>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -154,7 +153,7 @@
         <item row="3" column="1">
          <widget class="BodyLabel" name="durationLabel">
           <property name="text">
-           <string>Body label</string>
+              <string/>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -171,7 +170,7 @@
         <item row="4" column="1">
          <widget class="BodyLabel" name="sampleRateLabel">
           <property name="text">
-           <string>Body label</string>
+              <string/>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -188,7 +187,7 @@
         <item row="5" column="1">
          <widget class="BodyLabel" name="fileSizeLabel">
           <property name="text">
-           <string>Body label</string>
+              <string/>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -213,7 +212,7 @@
            <enum>Qt::LeftToRight</enum>
           </property>
           <property name="text">
-           <string>Body label</string>
+              <string/>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -276,11 +275,6 @@
   </customwidget>
   <customwidget>
    <class>StrongBodyLabel</class>
-   <extends>QLabel</extends>
-   <header>qfluentwidgets</header>
-  </customwidget>
-  <customwidget>
-   <class>TitleLabel</class>
    <extends>QLabel</extends>
    <header>qfluentwidgets</header>
   </customwidget>

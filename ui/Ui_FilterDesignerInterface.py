@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtWidgets
 class Ui_FilterDesignerInterface(object):
     def setupUi(self, FilterDesignerInterface):
         FilterDesignerInterface.setObjectName("FilterDesignerInterface")
-        FilterDesignerInterface.resize(935, 573)
+        FilterDesignerInterface.resize(943, 590)
         self.horizontalLayout = QtWidgets.QHBoxLayout(FilterDesignerInterface)
         self.horizontalLayout.setContentsMargins(20, 40, 20, 20)
         self.horizontalLayout.setObjectName("horizontalLayout")
