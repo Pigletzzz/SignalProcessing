@@ -1,3 +1,5 @@
+import librosa
+import numpy as np
 from PyQt5.QtCore import QCoreApplication, Qt
 from PyQt5.QtWidgets import QWidget, QAbstractItemView, QTableWidgetItem, QStackedWidget, QLabel, QVBoxLayout
 from matplotlib import pyplot
@@ -5,15 +7,18 @@ from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from qfluentwidgets import Pivot
 from qfluentwidgets.multimedia import SimpleMediaPlayBar
 
+from controller.AudioFilterController import AudioFilterController
 from entity.Audio import Audio
 from entity.Filter import PassbandType, FilterType
 from ui.Ui_AudioFilterInterface import Ui_AudioFilterInterface
 
 
 class AudioFilterView(QWidget, Ui_AudioFilterInterface):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, audioFilterController: AudioFilterController = None):
         super().__init__(parent=parent)
         self.setupUi(self)
+
+        self.audioFilterController = audioFilterController
 
         self.simplePlayerBar = SimpleMediaPlayBar(self)
 
@@ -107,8 +112,13 @@ class AudioFilterView(QWidget, Ui_AudioFilterInterface):
         except Exception as e:
             print(e)
 
+    # “滤波”按钮的回调函数
     def onFilterButtonClick(self):
-        print('clicked')
+        self.audioFilterController.audioFilter(self.audiosTable.selectedIndexes())
+        # try:
+        #     print(self.audiosTable.selectedIndexes()[0].row())
+        # except Exception as e:
+        #     print(type(e))
 
     # 添加子页面的方法
     def addSubInterface(self, widget: QLabel, objectName, text):
@@ -119,3 +129,26 @@ class AudioFilterView(QWidget, Ui_AudioFilterInterface):
             text=text,
             onClick=lambda: self.stackedWidget.setCurrentWidget(widget)
         )
+
+    def plotAudio(self, y, yout, sr):
+        self.originStftFigure.clf()
+        originStftPlot = self.originStftFigure.subplots()
+        D = librosa.amplitude_to_db(np.abs(librosa.stft(y)), ref=np.max)
+        librosa.display.specshow(D, sr=sr, x_axis='time', y_axis='linear', ax=originStftPlot)
+        self.originStftCanvas.draw()
+
+        self.originTimeFigure.clf()
+        originTimePlot = self.originTimeFigure.subplots()
+        librosa.display.waveshow(y, sr=sr, ax=originTimePlot)
+        self.originTimeCanvas.draw()
+
+        self.processedStftFigure.clf()
+        processedStftPlot = self.processedStftFigure.subplots()
+        D = librosa.amplitude_to_db(np.abs(librosa.stft(yout)), ref=np.max)
+        librosa.display.specshow(D, sr=sr, x_axis='time', y_axis='linear', ax=processedStftPlot)
+        self.processedStftCanvas.draw()
+
+        self.processedTimeFigure.clf()
+        processedTimePlot = self.processedTimeFigure.subplots()
+        librosa.display.waveshow(yout, sr=sr, ax=processedTimePlot)
+        self.processedTimeCanvas.draw()

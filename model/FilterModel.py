@@ -39,8 +39,6 @@ class FilterModel(object):
     def iirDesign(self, sampleRate: int, passbandLow: int, passbandHigh: int, stopbandLow: int, stopbandHigh: int,
                   Rp: float, As: float, passband: PassbandType, protoTypes: ProtoType):
         # 计算参数
-        # TODO 频率预畸
-        fn = sampleRate
         if (passband == PassbandType.LOWPASS or passband == PassbandType.HIGHPASS):
             wp = passbandLow * 2 * np.pi / sampleRate / 2  # 由于未知的原因，这里需要除二，否则生成的滤波器参数是输入值的两倍
             ws = stopbandLow * 2 * np.pi / sampleRate / 2

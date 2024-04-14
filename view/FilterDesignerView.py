@@ -103,7 +103,6 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
             self.filterController.firDesign(sampleRate, order, cutoffFreq1, cutoffFreq2, passband, window)
         else:
             # IIR滤波器设计
-            print('iir designer')
             passband = self.iirInterface.passbandsBox.currentIndex()
             sampleRate = self.iirInterface.sampleRateEdit.text()
             passbandLow = self.iirInterface.passbandFreqLowEdit.text()
