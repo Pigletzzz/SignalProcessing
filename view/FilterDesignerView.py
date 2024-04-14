@@ -116,7 +116,7 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
                                             stopbandHigh, passbandRipple, stopbandAttenuation, passband, protoTypes)
 
     def onPlotUpdate(self, b, a, w, h, fs, nfft):
-        f = np.linspace(0, fs, nfft)
+        f = np.linspace(0, fs / 2, nfft)
         h_db = 20 * np.log10(np.abs(h))  # 幅度响应（dB）
         h_angle = np.unwrap(np.angle(h))  # 相位响应（弧度）
         group_delay = -np.diff(h_angle) / (2.0 * np.pi) * fs / nfft  # 群延迟响应（秒）
@@ -126,7 +126,7 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         # 绘制幅度响应
         self.ampFigure.clf()
         ampPlot = self.ampFigure.subplots()
-        ampPlot.plot(f[:nfft // 2], h_db[:nfft // 2])
+        ampPlot.plot(f[:nfft], h_db[:nfft])
         ampPlot.set_title('Amplitude Response (dB)')
         ampPlot.set_xlabel('Frequency (Hz)')
         ampPlot.set_ylabel('Magnitude')
@@ -136,7 +136,7 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         # 绘制相位响应
         self.phaseFigure.clf()
         phasePlot = self.phaseFigure.subplots()
-        phasePlot.plot(f[:nfft // 2], h_angle[:nfft // 2])
+        phasePlot.plot(f[:nfft], h_angle[:nfft])
         phasePlot.set_title('Phase Response (radians)')
         phasePlot.set_xlabel('Frequency (Hz)')
         phasePlot.set_ylabel('Phase')
@@ -146,11 +146,12 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         # 绘制群延迟响应
         self.groupDelayFigure.clf()
         groupDelayPlot = self.groupDelayFigure.subplots()
-        groupDelayPlot.plot(f[1:nfft // 2], group_delay[1:nfft // 2])
+        groupDelayPlot.plot(f[1:nfft - 1], group_delay[1:nfft])
         groupDelayPlot.set_title('Group Delay Response (seconds)')
         groupDelayPlot.set_xlabel('Frequency (Hz)')
         groupDelayPlot.set_ylabel('Group Delay')
         groupDelayPlot.grid(True)
+        groupDelayPlot.set_xlim(0, fs / 2)
         self.groupDelayCanvas.draw()
 
         # 绘制零极点分布

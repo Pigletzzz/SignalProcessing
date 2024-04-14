@@ -130,7 +130,9 @@ class AudioFilterView(QWidget, Ui_AudioFilterInterface):
             onClick=lambda: self.stackedWidget.setCurrentWidget(widget)
         )
 
+    # 画出滤波器前后语音的波形图
     def plotAudio(self, y, yout, sr):
+        # 滤波器前的波形图
         self.originStftFigure.clf()
         originStftPlot = self.originStftFigure.subplots()
         D = librosa.amplitude_to_db(np.abs(librosa.stft(y)), ref=np.max)
@@ -142,6 +144,7 @@ class AudioFilterView(QWidget, Ui_AudioFilterInterface):
         librosa.display.waveshow(y, sr=sr, ax=originTimePlot)
         self.originTimeCanvas.draw()
 
+        # 滤波后的波形图
         self.processedStftFigure.clf()
         processedStftPlot = self.processedStftFigure.subplots()
         D = librosa.amplitude_to_db(np.abs(librosa.stft(yout)), ref=np.max)

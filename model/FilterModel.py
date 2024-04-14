@@ -40,14 +40,14 @@ class FilterModel(object):
                   Rp: float, As: float, passband: PassbandType, protoTypes: ProtoType):
         # 计算参数
         if (passband == PassbandType.LOWPASS or passband == PassbandType.HIGHPASS):
-            wp = passbandLow * 2 * np.pi / sampleRate / 2  # 由于未知的原因，这里需要除二，否则生成的滤波器参数是输入值的两倍
-            ws = stopbandLow * 2 * np.pi / sampleRate / 2
+            wp = passbandLow * 2 * np.pi / sampleRate
+            ws = stopbandLow * 2 * np.pi / sampleRate
             p = 2 * sampleRate * np.tan(wp / 2)
             st = 2 * sampleRate * np.tan(ws / 2)
             self.cutoff = passbandLow / sampleRate
         else:
-            wp = [passbandLow * 2 * np.pi / sampleRate / 2, passbandHigh * 2 * np.pi / sampleRate / 2]
-            ws = [stopbandLow * 2 * np.pi / sampleRate / 2, stopbandHigh * 2 * np.pi / sampleRate / 2]
+            wp = [passbandLow * 2 * np.pi / sampleRate, passbandHigh * 2 * np.pi / sampleRate]
+            ws = [stopbandLow * 2 * np.pi / sampleRate, stopbandHigh * 2 * np.pi / sampleRate]
             p = [2 * sampleRate * np.tan(wp[0] / 2), 2 * sampleRate * np.tan(wp[1] / 2)]
             st = [2 * sampleRate * np.tan(ws[0] / 2), 2 * sampleRate * np.tan(ws[1] / 2)]
             self.cutoff = [passbandLow / sampleRate, passbandHigh / sampleRate]

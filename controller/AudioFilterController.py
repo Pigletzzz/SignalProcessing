@@ -28,4 +28,6 @@ class AudioFilterController:
         audio = self.audioModel.getAudio(indexes[0].row())
         b, a = self.filterModel.b, self.filterModel.a
         y = signal.filtfilt(b, a, audio.voiceNum)
+
+        # 画图
         self.audioFilterView.plotAudio(audio.voiceNum, y, audio.sampleRate)
