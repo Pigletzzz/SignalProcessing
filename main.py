@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication
 from controller.AudioFileController import AudioFileController
 from controller.AudioFilterController import AudioFilterController
 from controller.FilterController import FilterController
-from controller.route_controller import RouteController
+from controller.RouteController import RouteController
 from model.AudioModel import AudioModel
 from model.FilterModel import FilterModel
 from view.MainWindowView import MainWindow

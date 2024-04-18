@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget
 
-from controller.route_controller import RouteController
+from controller.RouteController import RouteController
 from ui.Ui_HomeInterface import Ui_HomeInterface
 
 
