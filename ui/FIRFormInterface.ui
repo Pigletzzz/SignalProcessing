@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FIRFormInterface</class>
+ <widget class="QWidget" name="FIRFormInterface">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>398</width>
+    <height>295</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="BodyLabel" name="BodyLabel_2">
+     <property name="text">
+         <string>通带</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="BodyLabel" name="BodyLabel_5">
+     <property name="text">
+      <string>采样率</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="LineEdit" name="sampleRateEdit"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="BodyLabel" name="BodyLabel_4">
+     <property name="text">
+      <string>阶数</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="LineEdit" name="orderEdit"/>
+   </item>
+   <item row="3" column="0">
+    <widget class="BodyLabel" name="BodyLabel_3">
+     <property name="text">
+      <string>截止频率</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="LineEdit" name="cutoffEditLow"/>
+   </item>
+   <item row="5" column="0">
+    <widget class="BodyLabel" name="BodyLabel">
+     <property name="text">
+      <string>窗函数</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="ComboBox" name="windowsBox"/>
+   </item>
+   <item row="4" column="1">
+    <widget class="LineEdit" name="cutoffEditHigh"/>
+   </item>
+   <item row="4" column="0">
+    <widget class="BodyLabel" name="BodyLabel_6">
+     <property name="text">
+      <string>高频率</string>
+     </property>
+    </widget>
+   </item>
+      <item row="0" column="1">
+          <widget class="ComboBox" name="passbandsBox"/>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ComboBox</class>
+   <extends>QPushButton</extends>
+   <header>qfluentwidgets</header>
+  </customwidget>
+  <customwidget>
+   <class>BodyLabel</class>
+   <extends>QLabel</extends>
+   <header>qfluentwidgets</header>
+  </customwidget>
+  <customwidget>
+   <class>LineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>qfluentwidgets</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
