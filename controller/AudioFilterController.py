@@ -1,3 +1,6 @@
+import os
+
+import soundfile
 from scipy import signal
 
 from model.AudioModel import AudioModel
@@ -30,4 +33,19 @@ class AudioFilterController:
         y = signal.filtfilt(b, a, audio.voiceNum)
 
         # 画图
-        self.audioFilterView.plotAudio(audio.voiceNum, y, audio.sampleRate)
+        self.audioFilterView.plotProcessedAudio(y, audio.sampleRate)
+        self.audioFilterView.plotOriginAudio(audio.voiceNum, audio.sampleRate)
+
+        # 导出滤波后的文件，方便播放
+        try:
+            if not os.path.exists('./output'):
+                os.mkdir('./output')
+            title = audio.title.split('.')[0] + '.wav'
+            soundfile.write('./output/' + title, y, audio.sampleRate)
+            self.audioFilterView.setPlayer('./output/' + title)
+        except Exception as e:
+            print(e)
+
+    def getCurrentAudioInfo(self, index: int):
+        audio = self.audioModel.getAudio(index)
+        return audio.sampleRate
