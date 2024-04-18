@@ -153,6 +153,4 @@ class Ui_AudioAnalysisInterface(object):
         self.BodyLabel_8.setText(_translate("AudioAnalysisInterface", "时长"))
         self.BodyLabel_9.setText(_translate("AudioAnalysisInterface", "采样率"))
         self.BodyLabel_10.setText(_translate("AudioAnalysisInterface", "大小"))
-
-
 from qfluentwidgets import BodyLabel, SimpleCardWidget, StrongBodyLabel, TableWidget, TransparentToolButton
