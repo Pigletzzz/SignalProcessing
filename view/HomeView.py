@@ -1,14 +1,14 @@
 from PyQt5.QtWidgets import QWidget
 
-from controller.RouteController import RouteController
+from presenter.RoutePresenter import RoutePresenter
 from ui.Ui_HomeInterface import Ui_HomeInterface
 
 
 class HomeView(QWidget, Ui_HomeInterface):
-    def __init__(self, parent=None, routeController: RouteController = None):
+    def __init__(self, parent=None, routePresenter: RoutePresenter = None):
         super().__init__(parent=parent)
         self.setupUi(self)
-        self.routeController = routeController
+        self.routePresenter = routePresenter
 
         self.initSignal()
 
@@ -17,7 +17,7 @@ class HomeView(QWidget, Ui_HomeInterface):
         self.filterDesignerButton.clicked.connect(self.onFilterDesignerButtonClicked)
 
     def onAudioAnalysisButtonClicked(self):
-        self.routeController.routeToView(1)
+        self.routePresenter.routeToView(1)
 
     def onFilterDesignerButtonClicked(self):
-        self.routeController.routeToView(2)
+        self.routePresenter.routeToView(2)

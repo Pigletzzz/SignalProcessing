@@ -3,7 +3,7 @@ from model.FilterModel import FilterModel
 
 
 # 用于执行滤波相关操作的Controller
-class FilterController(object):
+class FilterPresenter(object):
     def __init__(self, filterDesignerView, audioFilterView, filterModel: FilterModel):
         self.filterDesignerView = filterDesignerView
         self.audioFilterView = audioFilterView

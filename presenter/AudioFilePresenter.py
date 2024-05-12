@@ -6,7 +6,7 @@ from entity.Audio import Audio
 from model.AudioModel import AudioModel
 
 
-class AudioFileController:
+class AudioFilePresenter:
     def __init__(self, audioAnalysisView, audioFilterView, audioModel: AudioModel):
         self.audioAnalysisView = audioAnalysisView
         self.audioFilterView = audioFilterView

@@ -7,7 +7,7 @@ from model.AudioModel import AudioModel
 from model.FilterModel import FilterModel
 
 
-class AudioFilterController:
+class AudioFilterPresenter:
     def __init__(self, audioFilterView, audioModel: AudioModel, filterModel: FilterModel):
         self.audioFilterView = audioFilterView
         self.audioModel = audioModel

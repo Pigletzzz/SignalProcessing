@@ -7,18 +7,18 @@ from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from qfluentwidgets import Pivot
 from qfluentwidgets.multimedia import SimpleMediaPlayBar
 
-from controller.AudioFilterController import AudioFilterController
 from entity.Audio import Audio
 from entity.Filter import PassbandType, FilterType
+from presenter.AudioFilterPresenter import AudioFilterPresenter
 from ui.Ui_AudioFilterInterface import Ui_AudioFilterInterface
 
 
 class AudioFilterView(QWidget, Ui_AudioFilterInterface):
-    def __init__(self, parent=None, audioFilterController: AudioFilterController = None):
+    def __init__(self, parent=None, audioFilterPresenter: AudioFilterPresenter = None):
         super().__init__(parent=parent)
         self.setupUi(self)
 
-        self.audioFilterController = audioFilterController
+        self.audioFilterPresenter = audioFilterPresenter
 
         self.simplePlayerBar = SimpleMediaPlayBar(self)
 
@@ -112,7 +112,7 @@ class AudioFilterView(QWidget, Ui_AudioFilterInterface):
 
     # “滤波”按钮的回调函数
     def onFilterButtonClick(self):
-        self.audioFilterController.audioFilter(self.audiosTable.selectedIndexes())
+        self.audioFilterPresenter.audioFilter(self.audiosTable.selectedIndexes())
 
     # 添加子页面的方法
     def addSubInterface(self, widget: QLabel, objectName, text):
@@ -155,7 +155,7 @@ class AudioFilterView(QWidget, Ui_AudioFilterInterface):
     def onItemChanged(self):
         if len(self.audiosTable.selectedIndexes()) == 0:
             return
-        sampleRate = self.audioFilterController.getCurrentAudioInfo(self.audiosTable.selectedIndexes()[0].row())
+        sampleRate = self.audioFilterPresenter.getCurrentAudioInfo(self.audiosTable.selectedIndexes()[0].row())
         _translate = QCoreApplication.translate
         # TODO 进不去这个if else
         if self.cutoffLabel.text().title() == '低通' or self.cutoffLabel.text().title() == '高通':

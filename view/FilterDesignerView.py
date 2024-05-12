@@ -5,14 +5,14 @@ from matplotlib import pyplot
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from qfluentwidgets import Pivot, InfoBar, InfoBarPosition
 
-from controller.FilterController import FilterController
+from presenter.FilterPresenter import FilterPresenter
 from ui.Ui_FilterDesignerInterface import Ui_FilterDesignerInterface
 from view.FirFormSubView import FirFormSubView
 from view.IirFormSubView import IirFormSubView
 
 
 class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
-    def __init__(self, parent=None, filterController: FilterController = None):
+    def __init__(self, parent=None, filterPresenter: FilterPresenter = None):
         super().__init__(parent=parent)
         self.ampFigure = None
         self.ampCanvas = None
@@ -24,7 +24,7 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
         self.zeroPoleCanvas = None
         self.setupUi(self)
 
-        self.filterController = filterController
+        self.filterPresenter = filterPresenter
 
         # 导航栏相关成员变量声明
         self.pivot = Pivot(self)
@@ -100,7 +100,7 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
             cutoffFreq2 = self.firInterface.cutoffEditHigh.text()
 
             # 执行Fir滤波器设计
-            self.filterController.firDesign(sampleRate, order, cutoffFreq1, cutoffFreq2, passband, window)
+            self.filterPresenter.firDesign(sampleRate, order, cutoffFreq1, cutoffFreq2, passband, window)
         else:
             # IIR滤波器设计
             passband = self.iirInterface.passbandsBox.currentIndex()
@@ -112,8 +112,8 @@ class FilterDesignerView(QWidget, Ui_FilterDesignerInterface):
             passbandRipple = self.iirInterface.passbandRippleEdit.text()
             stopbandAttenuation = self.iirInterface.stopbandAttenuationEdit.text()
             protoTypes = self.iirInterface.protoTypesBox.currentIndex()
-            self.filterController.iirDesign(sampleRate, passbandLow, passbandHigh, stopbandLow,
-                                            stopbandHigh, passbandRipple, stopbandAttenuation, passband, protoTypes)
+            self.filterPresenter.iirDesign(sampleRate, passbandLow, passbandHigh, stopbandLow,
+                                           stopbandHigh, passbandRipple, stopbandAttenuation, passband, protoTypes)
 
     def onPlotUpdate(self, b, a, w, h, fs, nfft):
         f = np.linspace(0, fs / 2, nfft)

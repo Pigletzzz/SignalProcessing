@@ -2,12 +2,12 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 
-from controller.AudioFileController import AudioFileController
-from controller.AudioFilterController import AudioFilterController
-from controller.FilterController import FilterController
-from controller.RouteController import RouteController
 from model.AudioModel import AudioModel
 from model.FilterModel import FilterModel
+from presenter.AudioFilePresenter import AudioFilePresenter
+from presenter.AudioFilterPresenter import AudioFilterPresenter
+from presenter.FilterPresenter import FilterPresenter
+from presenter.RoutePresenter import RoutePresenter
 from view.MainWindowView import MainWindow
 
 if __name__ == '__main__':
@@ -22,17 +22,17 @@ if __name__ == '__main__':
         audioModel = AudioModel()
         filterModel = FilterModel()
 
-        # 声明Controller类
-        routeController = RouteController(myWin)
-        audioFileController = AudioFileController(myWin.audioAnalysisView, myWin.audioFilterView, audioModel)
-        filterController = FilterController(myWin.filterDesignerView, myWin.audioFilterView, filterModel)
-        audioFilterController = AudioFilterController(myWin.audioFilterView, audioModel, filterModel)
+        # 声明Presenter类
+        routePresenter = RoutePresenter(myWin)
+        audioFilePresenter = AudioFilePresenter(myWin.audioAnalysisView, myWin.audioFilterView, audioModel)
+        filterPresenter = FilterPresenter(myWin.filterDesignerView, myWin.audioFilterView, filterModel)
+        audioFilterPresenter = AudioFilterPresenter(myWin.audioFilterView, audioModel, filterModel)
 
-        # 传递Controller
-        myWin.homeView.routeController = routeController
-        myWin.audioAnalysisView.audioFileController = audioFileController
-        myWin.filterDesignerView.filterController = filterController
-        myWin.audioFilterView.audioFilterController = audioFilterController
+        # 传递Presenter
+        myWin.homeView.routePresenter = routePresenter
+        myWin.audioAnalysisView.audioFilePresenter = audioFilePresenter
+        myWin.filterDesignerView.filterPresenter = filterPresenter
+        myWin.audioFilterView.audioFilterPresenter = audioFilterPresenter
 
         myWin.show()
         sys.exit(app.exec_())

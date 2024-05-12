@@ -8,18 +8,18 @@ from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from qfluentwidgets import FluentIcon
 from qfluentwidgets.multimedia import SimpleMediaPlayBar
 
-from controller.AudioFileController import AudioFileController
 from entity.Audio import Audio
+from presenter.AudioFilePresenter import AudioFilePresenter
 from tool.UnitTool import byteToMB, secToMMSS
 from ui.Ui_AudioAnalysisInterface import Ui_AudioAnalysisInterface
 
 
 class AudioAnalysisView(QWidget, Ui_AudioAnalysisInterface):
-    def __init__(self, parent=None, audioFileController: AudioFileController = None):
+    def __init__(self, parent=None, audioFilePresenter: AudioFilePresenter = None):
         super().__init__(parent=parent)
         self.setupUi(self)
 
-        self.audioFileController = audioFileController
+        self.audioFilePresenter = audioFilePresenter
 
         # 声明图表相关成员变量
         self.stftFigure = pyplot.figure()
@@ -64,7 +64,7 @@ class AudioAnalysisView(QWidget, Ui_AudioAnalysisInterface):
                                                   options=options)
 
         if fileName:
-            self.audioFileController.readFile(fileName)
+            self.audioFilePresenter.readFile(fileName)
 
     # 为table添加一项
     def addTabItem(self, audio: Audio):
@@ -77,7 +77,7 @@ class AudioAnalysisView(QWidget, Ui_AudioAnalysisInterface):
         self.filesTable.selectRow(row_count)
 
     def onItemChose(self):
-        self.audioFileController.selectFile(self.filesTable.selectedIndexes()[0].row())
+        self.audioFilePresenter.selectFile(self.filesTable.selectedIndexes()[0].row())
 
     def setupAudio(self, audio: Audio):
         # 进行详细信息的显示
